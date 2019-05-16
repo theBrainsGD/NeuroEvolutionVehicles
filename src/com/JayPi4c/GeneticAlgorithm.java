@@ -62,11 +62,13 @@ public class GeneticAlgorithm {
 
 	public void show(Graphics2D g) {
 
-		for (Vehicle v : population) {
+		for (int i = population.size() - 1; i >= 0; i--) {
+			Vehicle v = population.get(i);
 			v.show(g);
-			if (bestV != null)
-				bestV.highlight(g);
+
 		}
+		if (bestV != null)
+			bestV.highlight(g);
 		g.setColor(Color.BLACK);
 		g.drawString("Generation #" + generation_count, 10, 20);
 	}
