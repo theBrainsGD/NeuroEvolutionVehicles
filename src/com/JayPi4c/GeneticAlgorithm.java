@@ -2,13 +2,15 @@ package com.JayPi4c;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GeneticAlgorithm {
 
 	public static final int POPULATION_SIZE = 100;
 	public static final double MUTAION_RATE = 0.05;
-	public static final int LIFESPAN = 50;
+	public static final int LIFESPAN = 40;
 	public static final int SIGHT = 50;
 
 	private int generation_count;
@@ -110,6 +112,32 @@ public class GeneticAlgorithm {
 
 	public int getGenerationCount() {
 		return generation_count;
+	}
+
+	public void saveModel() {
+		if (bestV != null) {
+			try {
+				bestV.getBrain().serialize();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void loadModel() {
+		String absolutePath = new File(".").getAbsolutePath();
+		File file = new File(absolutePath);
+		absolutePath = file.getParentFile().toString();
+		NeuralNetworkMutating nn = new NeuralNetworkMutating(6, 12, 2, 0);
+		try {
+			nn = NeuralNetworkMutating.deserialize(new File(absolutePath + "/NeuralNetwork.nn"));
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		for (int i = population.size() - 1; i >= 0; i--) {
+			population.get(i).setBrain(nn.copy());
+		}
+
 	}
 
 }

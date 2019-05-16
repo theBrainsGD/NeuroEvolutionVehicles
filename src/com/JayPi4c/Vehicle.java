@@ -59,6 +59,10 @@ public class Vehicle {
 		return brain.copy();
 	}
 
+	public void setBrain(NeuralNetworkMutating nn) {
+		brain = nn;
+	}
+
 	public void applyForce(PVector force) {
 		acc.add(force);
 	}

@@ -26,6 +26,14 @@ public class ContentPanel extends JPanel {
 		ga = new GeneticAlgorithm(track);
 	}
 
+	public void saveModel() {
+		ga.saveModel();
+	}
+
+	public void loadModel() {
+		ga.loadModel();
+	}
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
