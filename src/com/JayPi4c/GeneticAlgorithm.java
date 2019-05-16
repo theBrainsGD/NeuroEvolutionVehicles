@@ -1,12 +1,13 @@
 package com.JayPi4c;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 public class GeneticAlgorithm {
 
 	public static final int POPULATION_SIZE = 100;
-	public static final double MUTAION_RATE = 0.1;
+	public static final double MUTAION_RATE = 0.05;
 	public static final int LIFESPAN = 50;
 	public static final int SIGHT = 50;
 
@@ -66,6 +67,7 @@ public class GeneticAlgorithm {
 			if (bestV != null)
 				bestV.highlight(g);
 		}
+		g.setColor(Color.BLACK);
 		g.drawString("Generation #" + generation_count, 10, 20);
 	}
 

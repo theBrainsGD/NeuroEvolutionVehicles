@@ -9,7 +9,7 @@ import com.JayPi4c.utils.PVector;
 public class Track {
 	public static final int PARTS = 120;
 	public static final int NOISE_MAX = 12;
-	public static final int HALF_TRACK_WIDTH = 20;
+	public static final int HALF_TRACK_WIDTH = 30;
 
 	private PVector start, end;
 

@@ -27,7 +27,8 @@ public class ContentPanel extends JPanel {
 	}
 
 	@Override
-	public void paint(Graphics g) {
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		BufferedImage bImage = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2 = (Graphics2D) bImage.getGraphics();
 		// set the background white
@@ -36,8 +37,10 @@ public class ContentPanel extends JPanel {
 		// draw the track
 		track.show(g2);
 		ga.show(g2);
-
+		g2.dispose();
 		g.drawImage(bImage, 0, 0, null);
+		g.dispose();
+
 	}
 
 	public void update() {

@@ -158,20 +158,19 @@ public class Vehicle {
 	}
 
 	public void highlight(Graphics2D g) {
+		for (Ray r : rays)
+			r.show(g);
+		if (goal != null)
+			goal.show(g, Color.BLUE);
+		g.setColor(Color.BLACK);
+		g.drawString("Lap #" + lap, 10, 40);
+		g.drawString("Frames left: " + (lifespan - counter), 10, 60);
 		g.setColor(Color.RED);
 		g.translate(pos.x, pos.y);
 		g.rotate(vel.heading());
 		g.drawRect(-5, -2, 10, 5);
 		g.rotate(-vel.heading());
 		g.translate(-pos.x, -pos.y);
-		for (Ray r : rays)
-			r.show(g);
-
-		if (goal != null)
-			goal.show(g, Color.BLUE);
-		g.setColor(Color.BLACK);
-		g.drawString("Lap #" + lap, 10, 40);
-		g.drawString("Frames left: " + (lifespan - counter), 10, 60);
 	}
 
 	public boolean isDead() {
