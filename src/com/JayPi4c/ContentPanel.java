@@ -12,9 +12,9 @@ public class ContentPanel extends JPanel {
 
 	private static final long serialVersionUID = -853777491964887707L;
 
-	public static final int WIDTH = 700;
-	public static final int HEIGHT = 700;
-	Dimension size = new Dimension(WIDTH, HEIGHT);
+	public static final int WIDTH = 600;
+	public static final int HEIGHT = 600;
+	Dimension size = new Dimension(2 * WIDTH, HEIGHT);
 	Track track = new Track();
 
 	GeneticAlgorithm ga;
@@ -37,15 +37,28 @@ public class ContentPanel extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		BufferedImage bImage = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+		BufferedImage bImage = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2 = (Graphics2D) bImage.getGraphics();
 		// set the background white
 		g2.setColor(Color.WHITE);
-		g2.fillRect(0, 0, this.getWidth(), this.getHeight());
+		g2.fillRect(0, 0, WIDTH, HEIGHT);
 		// draw the track
 		track.show(g2);
 		ga.show(g2);
 		g2.dispose();
+
+		BufferedImage bImage2 = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g2d = (Graphics2D) bImage2.getGraphics();
+		// set the brackground white
+		g2d.setColor(Color.WHITE);
+		g2d.fillRect(0, 0, WIDTH, HEIGHT);
+		// draw some serious shit!
+		g2d.setColor(Color.RED);
+		g2d.drawString("some serious shit!", 50, 50);
+		g2d.dispose();
+
+		g.drawImage(bImage2, WIDTH, 0, null);
+
 		g.drawImage(bImage, 0, 0, null);
 		g.dispose();
 

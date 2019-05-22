@@ -28,7 +28,7 @@ public class Vehicle {
 	private NeuralNetworkMutating brain;
 	private int lap;
 
-	public Vehicle(PVector start, NeuralNetworkMutating nn) {
+	public Vehicle(PVector start, PVector startVel, NeuralNetworkMutating nn) {
 		fitness = 0;
 		lap = 0;
 		dead = false;
@@ -37,7 +37,10 @@ public class Vehicle {
 		index = 0;
 		goal = null;
 		pos = start.copy();
-		vel = new PVector();
+		if (startVel == null)
+			vel = new PVector(Math.random() * 2 - 1, Math.random() * 2 - 1);
+		else
+			vel = startVel.copy();
 		acc = new PVector();
 
 		rays = new ArrayList<Ray>();
@@ -51,8 +54,20 @@ public class Vehicle {
 			brain = new NeuralNetworkMutating(rays.size(), rays.size() * 2, 2, 0);
 	}
 
+	public Vehicle(PVector start) {
+		this(start, null, null);
+	}
+
 	public void mutate() {
 		brain.mutate(GeneticAlgorithm.MUTAION_RATE);
+	}
+
+	public PVector getVelocity() {
+		return vel.copy();
+	}
+
+	public void setVelocity(PVector vel) {
+		this.vel = vel.copy();
 	}
 
 	public NeuralNetworkMutating getBrain() {

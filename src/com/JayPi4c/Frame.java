@@ -33,6 +33,7 @@ public class Frame extends JFrame {
 		pack();
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setResizable(false);
+		setLocationRelativeTo(null);
 		setVisible(true);
 	}
 

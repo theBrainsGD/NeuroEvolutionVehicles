@@ -8,6 +8,7 @@ import com.JayPi4c.utils.PVector;
 
 public class Track {
 	public static final int PARTS = 120;
+	public static final int CHECKPOINT_DIVIDER = 4;
 	public static final int NOISE_MAX = 12;
 	public static final int HALF_TRACK_WIDTH = 30;
 
@@ -26,7 +27,7 @@ public class Track {
 			// for (double a = 0; a < Math.PI * 2; a += 0.1) {
 			double xoff = map(Math.cos(a), -1, 1, 0, NOISE_MAX);
 			double yoff = map(Math.sin(a), -1, 1, 0, NOISE_MAX);
-			double r = map(noise.eval(xoff, yoff), -1, 1, 200, 300);
+			double r = map(noise.eval(xoff, yoff), -1, 1, ContentPanel.WIDTH * 0.25, ContentPanel.WIDTH * 0.4);
 			double innerX = Math.cos(a) * (r - HALF_TRACK_WIDTH) + ContentPanel.WIDTH * 0.5;
 			double innerY = Math.sin(a) * (r - HALF_TRACK_WIDTH) + ContentPanel.HEIGHT * 0.5;
 			ptsInner.add(new PVector(innerX, innerY));
@@ -34,7 +35,7 @@ public class Track {
 			double outerX = Math.cos(a) * (r + HALF_TRACK_WIDTH) + ContentPanel.WIDTH * 0.5;
 			double outerY = Math.sin(a) * (r + HALF_TRACK_WIDTH) + ContentPanel.HEIGHT * 0.5;
 			ptsOuter.add(new PVector(outerX, outerY));
-			if (i % 4 == 0)
+			if (i % CHECKPOINT_DIVIDER == 0)
 				checkpoints.add(new Boundary(innerX, innerY, outerX, outerY));
 
 		}

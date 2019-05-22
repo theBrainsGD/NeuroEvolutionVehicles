@@ -24,7 +24,7 @@ public class GeneticAlgorithm {
 		population = new ArrayList<Vehicle>();
 		savedVehicles = new ArrayList<Vehicle>();
 		for (int i = 0; i < POPULATION_SIZE; i++) {
-			population.add(new Vehicle(track.getStart(), null));
+			population.add(new Vehicle(track.getStart(), null, null));
 		}
 	}
 
@@ -93,7 +93,7 @@ public class GeneticAlgorithm {
 		}
 		index--;
 		Vehicle v = savedVehicles.get(index);
-		Vehicle child = new Vehicle(track.getStart(), v.getBrain());
+		Vehicle child = new Vehicle(track.getStart(), v.getVelocity(), v.getBrain());
 
 		child.mutate();
 		return child;
