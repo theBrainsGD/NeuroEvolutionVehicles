@@ -96,7 +96,7 @@ public class GeneticAlgorithm {
 		}
 		index--;
 		Vehicle v = savedVehicles.get(index);
-		Vehicle child = new Vehicle(track.getStart(), v.getVelocity(), v.getBrain());
+		Vehicle child = new Vehicle(track.getStart(), v.getStartVelocity(), v.getBrain());
 
 		child.mutate();
 		return child;

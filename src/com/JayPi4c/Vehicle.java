@@ -11,6 +11,7 @@ public class Vehicle {
 	public static final double MAX_FORCE = 0.2;
 
 	private PVector pos, vel, acc;
+	private PVector startVel;
 
 	private double fitness;
 
@@ -41,6 +42,7 @@ public class Vehicle {
 			vel = new PVector(Math.random() * 2 - 1, Math.random() * 2 - 1);
 		else
 			vel = startVel.copy();
+		this.startVel = vel.copy();
 		acc = new PVector();
 
 		rays = new ArrayList<Ray>();
@@ -62,12 +64,12 @@ public class Vehicle {
 		brain.mutate(GeneticAlgorithm.MUTAION_RATE);
 	}
 
-	public PVector getVelocity() {
-		return vel.copy();
+	public PVector getStartVelocity() {
+		return startVel.copy();
 	}
 
-	public void setVelocity(PVector vel) {
-		this.vel = vel.copy();
+	public void setStartVelocity(PVector vel) {
+		this.startVel = vel.copy();
 	}
 
 	public NeuralNetworkMutating getBrain() {
