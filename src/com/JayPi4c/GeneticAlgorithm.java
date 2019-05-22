@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 public class GeneticAlgorithm {
 
 	public static final int POPULATION_SIZE = 100;
@@ -125,19 +128,22 @@ public class GeneticAlgorithm {
 	}
 
 	public void loadModel() {
-		String absolutePath = new File(".").getAbsolutePath();
-		File file = new File(absolutePath);
-		absolutePath = file.getParentFile().toString();
+		JFileChooser chooser = new JFileChooser(new File(".").getAbsolutePath());
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Neural Network files", "nn");
+		chooser.setFileFilter(filter);
+		int returnVal = chooser.showOpenDialog(null);
 		NeuralNetworkMutating nn = new NeuralNetworkMutating(6, 12, 2, 0);
 		try {
-			nn = NeuralNetworkMutating.deserialize(new File(absolutePath + "/NeuralNetwork.nn"));
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File f = chooser.getSelectedFile();
+				nn = NeuralNetworkMutating.deserialize(f);
+			}
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
 		for (int i = population.size() - 1; i >= 0; i--) {
 			population.get(i).setBrain(nn.copy());
 		}
-
 	}
 
 }
