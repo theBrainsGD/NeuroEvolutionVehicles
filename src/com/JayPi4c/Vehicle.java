@@ -179,10 +179,10 @@ public class Vehicle {
 	}
 
 	public void highlight(Graphics2D g) {
-		for (Ray r : rays)
-			r.show(g);
 		if (goal != null)
 			goal.show(g, Color.BLUE);
+		for (Ray r : rays)
+			r.show(g);
 		g.setColor(Color.BLACK);
 		g.drawString("Lap #" + lap, 10, 40);
 		g.drawString("Frames left: " + (lifespan - counter), 10, 60);
