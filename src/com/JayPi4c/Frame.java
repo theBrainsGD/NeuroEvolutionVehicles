@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 public class Frame extends JFrame {
@@ -25,9 +26,21 @@ public class Frame extends JFrame {
 		});
 		options.add(saveButton);
 		options.add(loadButton);
+		JMenu settings = new JMenu("Settings");
+		JMenuItem cycles = new JMenuItem("set cycles");
+		cycles.addActionListener(e -> {
+			try {
+				GeneticAlgorithm.CYCLES = Integer.parseInt(
+						JOptionPane.showInputDialog(this, "cycles", "Set cycles", JOptionPane.QUESTION_MESSAGE));
+			} catch (NumberFormatException exc) {
+				exc.printStackTrace();
+			}
 
+		});
+		settings.add(cycles);
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.add(options);
+		menuBar.add(settings);
 		setJMenuBar(menuBar);
 
 		pack();

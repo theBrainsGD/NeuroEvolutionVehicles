@@ -15,6 +15,7 @@ public class GeneticAlgorithm {
 	public static final double MUTAION_RATE = 0.05;
 	public static final int LIFESPAN = 40;
 	public static final int SIGHT = 50;
+	public static int CYCLES = 1;
 
 	private int generation_count;
 
@@ -32,37 +33,35 @@ public class GeneticAlgorithm {
 	}
 
 	public void update(Track track) {
-
-		// final int CYCLES = 10;
 		bestV = population.get(0);
-		// for(int i = 0; i < CYCLES; i++) {
+		for (int c = 0; c < CYCLES; c++) {
 
-		for (Vehicle v : population) {
-			v.look(track.getWalls());
-			v.check(track.getCheckpoints());
-			v.bounds();
-			v.update();
+			for (Vehicle v : population) {
+				v.look(track.getWalls());
+				v.check(track.getCheckpoints());
+				v.bounds();
+				v.update();
 
-			if (v.getFitness() > bestV.getFitness()) {
-				bestV = v;
+				if (v.getFitness() > bestV.getFitness()) {
+					bestV = v;
+				}
 			}
-		}
 
-		for (int i = population.size() - 1; i >= 0; i--) {
-			Vehicle v = population.get(i);
-			if (v.isDead() || v.isFinished()) {
-				savedVehicles.add(population.remove(i));
+			for (int i = population.size() - 1; i >= 0; i--) {
+				Vehicle v = population.get(i);
+				if (v.isDead() || v.isFinished()) {
+					savedVehicles.add(population.remove(i));
+				}
 			}
-		}
 
-		if (population.size() == 0) {
-			track.buildTrack();
-			nextGeneration(track);
-			generation_count++;
-			System.out.println("Generation #" + generation_count);
-		}
+			if (population.size() == 0) {
+				track.buildTrack();
+				nextGeneration(track);
+				generation_count++;
+				System.out.println("Generation #" + generation_count);
+			}
 
-//	}
+		}
 	}
 
 	public void show(Graphics2D g) {
