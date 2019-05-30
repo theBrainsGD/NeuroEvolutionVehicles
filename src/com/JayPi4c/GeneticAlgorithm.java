@@ -81,18 +81,21 @@ public class GeneticAlgorithm {
 
 	public void showPOV(Graphics2D g, Track track) {
 		if (bestV != null) {
+			double part = 0.1;
+			double wSq = ContentPanel.WIDTH * ContentPanel.WIDTH;// * part;
 			double scene[] = bestV.getScene(track.getWalls());
 			double w = ContentPanel.WIDTH / (double) scene.length;
 			for (int i = 0; i < scene.length; i++) {
 				double d = scene[i];
 				double sq = d * d;
-				double part = 0.25;
-				double wSq = ContentPanel.WIDTH * ContentPanel.WIDTH * part * part;
-				int b = (int) map(sq, 0, wSq, 255, 0);
-				// System.out.println("Das ist b:" + b);
-				double h = map(d, 0, ContentPanel.WIDTH, ContentPanel.HEIGHT, 0);
+				int b = 25;
+				if (sq <= wSq)
+					b = (int) map(sq, 0, wSq, 235, 25);
+				double h = 0;
+				if (d <= ContentPanel.WIDTH)
+					h = map(d, 0, ContentPanel.WIDTH, ContentPanel.HEIGHT - 10, 0);
 				try {
-					g.setColor(new Color(255 - b, 255 - b, 255 - b));
+					g.setColor(new Color(b, b, b));
 				} catch (IllegalArgumentException exc) {
 					// System.out.println("B ist: " + b);
 				}
