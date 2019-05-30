@@ -67,6 +67,7 @@ public class GeneticAlgorithm {
 	public void show(Graphics2D g) {
 		if (bestV != null)
 			bestV.highlight(g);
+
 		for (int i = population.size() - 1; i >= 0; i--) {
 			Vehicle v = population.get(i);
 			if (!v.equals(bestV))
@@ -76,6 +77,31 @@ public class GeneticAlgorithm {
 
 		g.setColor(Color.BLACK);
 		g.drawString("Generation #" + generation_count, 10, 20);
+	}
+
+	public void showPOV(Graphics2D g, Track track) {
+		if (bestV != null) {
+			double scene[] = bestV.getScene(track.getWalls());
+			double w = ContentPanel.WIDTH / (double) scene.length;
+			for (int i = 0; i < scene.length; i++) {
+				double d = scene[i];
+				double sq = d * d;
+				double part = 0.25;
+				double wSq = ContentPanel.WIDTH * ContentPanel.WIDTH * part * part;
+				int b = (int) map(sq, 0, wSq, 255, 0);
+				// System.out.println("Das ist b:" + b);
+				double h = map(d, 0, ContentPanel.WIDTH, ContentPanel.HEIGHT, 0);
+				try {
+					g.setColor(new Color(255 - b, 255 - b, 255 - b));
+				} catch (IllegalArgumentException exc) {
+					// System.out.println("B ist: " + b);
+				}
+				double x = i * w;
+				double y = (ContentPanel.HEIGHT - h) * 0.5;
+
+				g.fillRect((int) x, (int) y, (int) w + 1, (int) h);
+			}
+		}
 	}
 
 	private void nextGeneration(Track track) {
@@ -144,6 +170,10 @@ public class GeneticAlgorithm {
 		for (int i = population.size() - 1; i >= 0; i--) {
 			population.get(i).setBrain(nn.copy());
 		}
+	}
+
+	double map(double value, double inputMin, double inputMax, double outputMin, double outputMax) {
+		return outputMin + (outputMax - outputMin) * ((value - inputMin) / (inputMax - inputMin));
 	}
 
 }

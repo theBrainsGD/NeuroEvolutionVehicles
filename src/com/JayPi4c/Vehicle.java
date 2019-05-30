@@ -118,6 +118,33 @@ public class Vehicle {
 
 	}
 
+	public double[] getScene(ArrayList<Boundary> walls) {// , Graphics2D g) {
+		double scene[] = new double[500];
+		double heading = vel.heading();
+		for (int i = 0; i < scene.length; i++) {
+			double angle = heading + map(i, 0, scene.length, Math.toRadians(-25), Math.toRadians(25));
+			Ray ray = new Ray(pos, angle);
+			// ray.show(g);
+			// PVector closest = null;
+			double record = 999999;
+			for (int j = 0; j < walls.size(); j++) {
+				Boundary w = walls.get(j);
+				PVector pt = ray.cast(w);
+				if (pt != null) {
+					double d = PVector.dist(pt, pos);
+					double a = ray.getDirection().heading() + vel.heading();
+					d *= Math.cos(a);
+					if (d < record) {
+						record = d;
+						// closest = pt;
+					}
+				}
+			}
+			scene[i] = record;
+		}
+		return scene;
+	}
+
 	public void update() {
 		if (!dead && !finished) {
 			pos.add(vel);

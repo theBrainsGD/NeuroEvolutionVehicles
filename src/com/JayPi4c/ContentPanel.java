@@ -52,9 +52,10 @@ public class ContentPanel extends JPanel {
 		// set the brackground white
 		g2d.setColor(Color.WHITE);
 		g2d.fillRect(0, 0, WIDTH, HEIGHT);
+		ga.showPOV(g2d, track);
 		// draw some serious shit!
-		g2d.setColor(Color.RED);
-		g2d.drawString("some serious shit!", 50, 50);
+		// g2d.setColor(Color.RED);
+		// g2d.drawString("some serious shit!", 50, 50);
 		g2d.dispose();
 
 		g.drawImage(bImage2, WIDTH, 0, null);

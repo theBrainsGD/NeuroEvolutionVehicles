@@ -16,6 +16,10 @@ public class Ray {
 		this.dir = PVector.fromAngle(angle);
 	}
 
+	public PVector getDirection() {
+		return this.dir.copy();
+	}
+
 	public void lookAt(double x, double y) {
 		dir.x = x - this.pos.x;
 		dir.y = y - this.pos.y;
