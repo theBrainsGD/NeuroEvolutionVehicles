@@ -122,7 +122,7 @@ public class Vehicle {
 		double scene[] = new double[500];
 		double heading = vel.heading();
 		for (int i = 0; i < scene.length; i++) {
-			double angle = heading + map(i, 0, scene.length, Math.toRadians(-25), Math.toRadians(25));
+			double angle = heading + map(i, 0, scene.length, Math.toRadians(-40), Math.toRadians(40));
 			Ray ray = new Ray(pos, angle);
 			// ray.show(g);
 			// PVector closest = null;
