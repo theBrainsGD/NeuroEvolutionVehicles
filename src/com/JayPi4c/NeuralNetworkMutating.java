@@ -73,14 +73,20 @@ public class NeuralNetworkMutating implements Serializable {
 		try {
 			Matrix inputs = Matrix.transpose(inputs_list);
 			Matrix hidden_inputs = Matrix.dot(this.wih, inputs);
-			Matrix hidden_outputs = hidden_inputs.map(this,
-					NeuralNetworkMutating.class.getMethod("sigmoid", double.class));
-			Matrix final_inputs = Matrix.dot(this.who, hidden_outputs);
-			final_outputs = final_inputs.map(this, NeuralNetworkMutating.class.getMethod("sigmoid", double.class));
+			Matrix hidden_outputs;
+				hidden_outputs = hidden_inputs.map(this,
+						NeuralNetworkMutating.class.getMethod("sigmoid", double.class));
+				Matrix final_inputs = Matrix.dot(this.who, hidden_outputs);
+				final_outputs = final_inputs.map(this, NeuralNetworkMutating.class.getMethod("sigmoid", double.class));
+			
+			
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
 				| SecurityException e) {
 			System.out.println(err_Message);
 			System.err.println(e);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block Die Richtige Exception muss nur oben hinzugefügt werden.
+			e.printStackTrace();
 		}
 		return final_outputs;
 	}
@@ -140,6 +146,9 @@ public class NeuralNetworkMutating implements Serializable {
 			System.out.println(err_Message);
 			System.err.println(e);
 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
