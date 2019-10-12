@@ -26,10 +26,10 @@ public class Vehicle {
 
 	private Boundary goal;
 
-	private NeuralNetworkMutating brain;
+	private GenericNeuralNetwork brain;
 	private int lap;
 
-	public Vehicle(PVector start, PVector startVel, NeuralNetworkMutating nn) {
+	public Vehicle(PVector start, PVector startVel, GenericNeuralNetwork nn) {
 		fitness = 0;
 		lap = 0;
 		dead = false;
@@ -51,9 +51,9 @@ public class Vehicle {
 		}
 
 		if (nn != null)
-			brain = nn.copy();
+			brain = (GenericNeuralNetwork) nn.copy();
 		else
-			brain = new NeuralNetworkMutating(rays.size(), rays.size() * 2, 2, 0);
+			brain = new GenericNeuralNetwork(rays.size(), rays.size() * 2, 2, 0, GeneticAlgorithm.MUTAION_RATE);
 	}
 
 	public Vehicle(PVector start) {
@@ -72,11 +72,11 @@ public class Vehicle {
 		this.startVel = vel.copy();
 	}
 
-	public NeuralNetworkMutating getBrain() {
-		return brain.copy();
+	public GenericNeuralNetwork getBrain() {
+		return (GenericNeuralNetwork) brain.copy();
 	}
 
-	public void setBrain(NeuralNetworkMutating nn) {
+	public void setBrain(GenericNeuralNetwork nn) {
 		brain = nn;
 	}
 

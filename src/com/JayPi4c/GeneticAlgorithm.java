@@ -161,17 +161,17 @@ public class GeneticAlgorithm {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Neural Network files", "nn");
 		chooser.setFileFilter(filter);
 		int returnVal = chooser.showOpenDialog(null);
-		NeuralNetworkMutating nn = new NeuralNetworkMutating(6, 12, 2, 0);
+		GenericNeuralNetwork nn = new GenericNeuralNetwork(6, 12, 2, 0, MUTAION_RATE);
 		try {
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File f = chooser.getSelectedFile();
-				nn = NeuralNetworkMutating.deserialize(f);
+				nn = (GenericNeuralNetwork) GenericNeuralNetwork.deserialize(f);
 			}
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
 		for (int i = population.size() - 1; i >= 0; i--) {
-			population.get(i).setBrain(nn.copy());
+			population.get(i).setBrain((GenericNeuralNetwork) nn.copy());
 		}
 	}
 
