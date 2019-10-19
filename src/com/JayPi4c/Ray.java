@@ -7,27 +7,21 @@ import com.JayPi4c.utils.PVector;
 
 public class Ray {
 	private PVector pos;
-	private double angle;
 	private PVector dir;
 
 	Ray(PVector pos, double angle) {
 		this.pos = pos;
-		this.angle = angle;
 		this.dir = PVector.fromAngle(angle);
 	}
 
-	public PVector getDirection() {
-		return this.dir.copy();
+	public void setAngle(double angle) {
+		this.dir = PVector.fromAngle(angle);
 	}
 
 	public void lookAt(double x, double y) {
 		dir.x = x - this.pos.x;
 		dir.y = y - this.pos.y;
 		dir.normalize();
-	}
-
-	public void rotate(double offset) {
-		dir = PVector.fromAngle(angle + offset);
 	}
 
 	public void show(Graphics2D g) {
@@ -61,5 +55,9 @@ public class Ray {
 		} else {
 			return null;
 		}
+	}
+
+	public PVector getDirection() {
+		return this.dir.copy();
 	}
 }

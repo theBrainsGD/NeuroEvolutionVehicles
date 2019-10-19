@@ -46,12 +46,12 @@ public class Vehicle {
 		acc = new PVector();
 
 		rays = new ArrayList<Ray>();
-		for (int a = -45; a < 45; a += 15) {
+		for (int a = -45; a <= 45; a += 15) {
 			rays.add(new Ray(pos, Math.toRadians(a)));
 		}
 
 		if (nn != null)
-			brain = (GenericNeuralNetwork) nn.copy();
+			brain = nn.copy();
 		else
 			brain = new GenericNeuralNetwork(rays.size(), rays.size() * 2, 2, 0, GeneticAlgorithm.MUTAION_RATE);
 	}
@@ -73,7 +73,7 @@ public class Vehicle {
 	}
 
 	public GenericNeuralNetwork getBrain() {
-		return (GenericNeuralNetwork) brain.copy();
+		return brain.copy();
 	}
 
 	public void setBrain(GenericNeuralNetwork nn) {
@@ -118,30 +118,32 @@ public class Vehicle {
 
 	}
 
-	public double[] getScene(ArrayList<Boundary> walls) {// , Graphics2D g) {
+	public double[] getScene(ArrayList<Boundary> walls, Graphics2D g) {// , Graphics2D g) {
+		final double FOV = 80;
 		double scene[] = new double[500];
-		double heading = vel.heading();
-		for (int i = 0; i < scene.length; i++) {
-			double angle = heading + map(i, 0, scene.length, Math.toRadians(-40), Math.toRadians(40));
-			Ray ray = new Ray(pos, angle);
-			// ray.show(g);
+		double part = FOV / scene.length;
+		int index = 0;
+		for (double a = (FOV * -0.5); a < FOV * 0.5; a += part) {
+			Ray r = new Ray(this.pos, Math.toRadians(a) + this.vel.heading());
 			// PVector closest = null;
-			double record = 999999;
-			for (int j = 0; j < walls.size(); j++) {
-				Boundary w = walls.get(j);
-				PVector pt = ray.cast(w);
+			double record = Double.MAX_VALUE;
+			for (Boundary wall : walls) {
+				PVector pt = r.cast(wall);
 				if (pt != null) {
-					double d = PVector.dist(pt, pos);
-					double a = ray.getDirection().heading() + vel.heading();
-					d *= Math.cos(a);
+					double d = PVector.dist(this.pos, pt);
+					double angle = r.getDirection().heading() - this.vel.heading();
+					d *= Math.cos(angle);
 					if (d < record) {
 						record = d;
 						// closest = pt;
 					}
 				}
 			}
-			scene[i] = record;
+			if (index == 500)
+				break;// Das ist zwar nicht schoen, aber solange es funktioniert.
+			scene[index++] = record;
 		}
+
 		return scene;
 	}
 
@@ -155,9 +157,9 @@ public class Vehicle {
 			if (counter > lifespan) {
 				dead = true;
 			}
-
-			for (Ray r : rays) {
-				r.rotate(vel.heading());
+			rays = new ArrayList<Ray>();
+			for (int a = -45; a <= 45; a += 15) {
+				rays.add(new Ray(this.pos, Math.toRadians(a) + this.vel.heading()));
 			}
 		}
 	}

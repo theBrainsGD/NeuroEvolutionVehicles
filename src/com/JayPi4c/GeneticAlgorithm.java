@@ -80,10 +80,11 @@ public class GeneticAlgorithm {
 	}
 
 	public void showPOV(Graphics2D g, Track track) {
+		g.setColor(Color.WHITE);
 		if (bestV != null) {
 			double part = 0.5;
 			double wSq = ContentPanel.WIDTH * ContentPanel.WIDTH * part;
-			double scene[] = bestV.getScene(track.getWalls());
+			double scene[] = bestV.getScene(track.getWalls(), g);
 			double w = ContentPanel.WIDTH / (double) scene.length;
 			for (int i = 0; i < scene.length; i++) {
 				double d = scene[i];
@@ -96,8 +97,8 @@ public class GeneticAlgorithm {
 					h = map(d, 0, ContentPanel.WIDTH, ContentPanel.HEIGHT - 10, 0);
 				try {
 					g.setColor(new Color(b, b, b));
-				} catch (IllegalArgumentException exc) {
-					// System.out.println("B ist: " + b);
+				} catch (IllegalArgumentException exc) { // System.out.println("B ist: " + b);
+
 				}
 				double x = i * w;
 				double y = (ContentPanel.HEIGHT - h) * 0.5;
@@ -105,6 +106,7 @@ public class GeneticAlgorithm {
 				g.fillRect((int) x, (int) y, (int) w + 1, (int) h);
 			}
 		}
+
 	}
 
 	private void nextGeneration(Track track) {
@@ -171,7 +173,7 @@ public class GeneticAlgorithm {
 			e.printStackTrace();
 		}
 		for (int i = population.size() - 1; i >= 0; i--) {
-			population.get(i).setBrain((GenericNeuralNetwork) nn.copy());
+			population.get(i).setBrain(nn.copy());
 		}
 	}
 
