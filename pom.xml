@@ -15,7 +15,7 @@
 		<dependency>
 			<groupId>com.github.JayPi4c</groupId>
 			<artifactId>NeuralNetwork</artifactId>
-			<version>1434762aab</version>
+			<version>f6b7483</version>
 		</dependency>
 	</dependencies>
 	<build>
