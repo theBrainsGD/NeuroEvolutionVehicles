@@ -2,6 +2,8 @@ package com.JayPi4c;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,14 +67,25 @@ public class GeneticAlgorithm {
 	}
 
 	public void show(Graphics2D g) {
-		if (bestV != null)
-			bestV.highlight(g);
 
 		for (int i = population.size() - 1; i >= 0; i--) {
 			Vehicle v = population.get(i);
 			if (!v.equals(bestV))
 				v.show(g);
+		}
 
+		if (bestV != null) {
+			bestV.highlight(g);
+			BufferedImage img = bestV.getBrain().getSchemeImage();
+			int newW = (int) (img.getWidth() * 0.3), newH = (int) (img.getHeight() * 0.3);
+			Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+			BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+
+			Graphics2D g2d = dimg.createGraphics();
+			g2d.drawImage(tmp, 0, 0, null);
+			g2d.dispose();
+
+			g.drawImage(dimg, 0, ContentPanel.HEIGHT - newH, null);
 		}
 
 		g.setColor(Color.BLACK);
