@@ -1,128 +1,110 @@
-package main.java.com.JayPi4c.NeuroEvolution.model;
+package com.JayPi4c.NeuroEvolution.model;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import com.JayPi4c.NeuroEvolution.util.Observable;
 
-import com.JayPi4c.GenericNeuralNetwork;
+import lombok.Getter;
+import lombok.Synchronized;
+import lombok.extern.slf4j.Slf4j;
 
-import main.java.com.JayPi4c.NeuroEvolution.view.ContentPanel;
+@Getter
+@Slf4j
+public class GeneticAlgorithm extends Observable {
 
-public class GeneticAlgorithm {
+	private double mutationRate = 0.05;
+	private int populationSize = 100;
 
-	public static final int POPULATION_SIZE = 100;
-	public static final double MUTAION_RATE = 0.05;
-	public static final int LIFESPAN = 40;
-	public static final int SIGHT = 50;
-	public static int CYCLES = 1;
+	private int cycles = 1;
 
-	private int generation_count;
+	private int generationCount = 0;
 
 	private ArrayList<Vehicle> population;
 	private ArrayList<Vehicle> savedVehicles;
-	private Vehicle bestV = null;
 
-	public GeneticAlgorithm(Track track) {
-		generation_count = 0;
-		population = new ArrayList<Vehicle>();
-		savedVehicles = new ArrayList<Vehicle>();
-		for (int i = 0; i < POPULATION_SIZE; i++) {
-			population.add(new Vehicle(track.getStart(), null, null));
+	private Track track;
+
+	private Vehicle prevBest;
+
+	public GeneticAlgorithm() {
+		reset();
+	}
+
+	public void reset() {
+		this.track = new Track();
+		track.buildTrack();
+		generationCount = 0;
+		prevBest = null;
+		population = new ArrayList<>();
+		savedVehicles = new ArrayList<>();
+		for (int i = 0; i < populationSize; i++) {
+			population.add(new Vehicle(track.getStart(), null, null, mutationRate));
 		}
 	}
 
-	public void update(Track track) {
-		bestV = population.get(0);
-		for (int c = 0; c < CYCLES; c++) {
-
-			for (Vehicle v : population) {
-				v.look(track.getWalls());
-				v.check(track.getCheckpoints());
-				v.bounds();
-				v.update();
-
-				if (v.getFitness() > bestV.getFitness()) {
-					bestV = v;
-				}
-			}
-
-			for (int i = population.size() - 1; i >= 0; i--) {
-				Vehicle v = population.get(i);
-				if (v.isDead() || v.isFinished()) {
-					savedVehicles.add(population.remove(i));
-				}
-			}
-
-			if (population.size() == 0) {
-				track.buildTrack();
-				nextGeneration(track);
-				generation_count++;
-				System.out.println("Generation #" + generation_count);
-			}
-
-		}
+	public synchronized List<Vehicle> getPopulation() {
+		return population;
 	}
 
-	public void show(Graphics2D g) {
-		if (bestV != null)
-			bestV.highlight(g);
+	public void update() {
+		synchronized (this) {
 
-		for (int i = population.size() - 1; i >= 0; i--) {
-			Vehicle v = population.get(i);
-			if (!v.equals(bestV))
-				v.show(g);
+			for (int c = 0; c < cycles; c++) {
 
-		}
-
-		g.setColor(Color.BLACK);
-		g.drawString("Generation #" + generation_count, 10, 20);
-	}
-
-	public void showPOV(Graphics2D g, Track track) {
-		g.setColor(Color.WHITE);
-		if (bestV != null) {
-			double part = 0.5;
-			double wSq = ContentPanel.WIDTH * ContentPanel.WIDTH * part;
-			double scene[] = bestV.getScene(track.getWalls(), g);
-			double w = ContentPanel.WIDTH / (double) scene.length;
-			for (int i = 0; i < scene.length; i++) {
-				double d = scene[i];
-				double sq = d * d;
-				int b = 25;
-				if (sq <= wSq)
-					b = (int) map(sq, 0, wSq, 235, 50);
-				double h = 0;
-				if (d <= ContentPanel.WIDTH)
-					h = map(d, 0, ContentPanel.WIDTH, ContentPanel.HEIGHT - 10, 0);
-				try {
-					g.setColor(new Color(b, b, b));
-				} catch (IllegalArgumentException exc) { // System.out.println("B ist: " + b);
+				for (Vehicle v : population) {
+					v.look(track.getWalls());
+					v.check(track.getCheckpoints());
+					v.update();
 
 				}
-				double x = i * w;
-				double y = (ContentPanel.HEIGHT - h) * 0.5;
 
-				g.fillRect((int) x, (int) y, (int) w + 1, (int) h);
+				for (int i = population.size() - 1; i >= 0; i--) {
+					Vehicle v = population.get(i);
+					if (v.isDead()) {
+						savedVehicles.add(population.remove(i));
+					}
+				}
+
+				if (population.isEmpty()) {
+					track.buildTrack();
+					nextGeneration();
+					generationCount++;
+					log.debug("Generation #{}", generationCount);
+				}
+
 			}
 		}
-
+		setChanged();
+		notifyAllObservers();
 	}
 
-	private void nextGeneration(Track track) {
+	private void nextGeneration() {
 		calculateFitness();
-		population = new ArrayList<Vehicle>();
-		for (int i = 0; i < POPULATION_SIZE; i++) {
-			population.add(pickOne(track));
+		population = new ArrayList<>();
+		prevBest = findBestVehicle();
+		population.add(prevBest);
+		for (int i = 1; i < populationSize; i++) {
+			population.add(pickOne());
 		}
-		savedVehicles = new ArrayList<Vehicle>();
+		savedVehicles = new ArrayList<>();
 	}
 
-	private Vehicle pickOne(Track track) {
+	private Vehicle findBestVehicle() {
+		double fitness = 0;
+		Vehicle best = null;
+		for (Vehicle v : savedVehicles) {
+			if (v.getFitness() > fitness) {
+				fitness = v.getFitness();
+				best = v;
+			}
+		}
+		Vehicle v = new Vehicle(track.getStart(), best.getStartVelocity(), best.getBrain(), mutationRate);
+		v.setId(best.getId());
+		return v;
+	}
+
+	private Vehicle pickOne() {
 		int index = 0;
 		double r = Math.random();
 		while (r > 0) {
@@ -131,58 +113,24 @@ public class GeneticAlgorithm {
 		}
 		index--;
 		Vehicle v = savedVehicles.get(index);
-		Vehicle child = new Vehicle(track.getStart(), v.getStartVelocity(), v.getBrain());
+		Vehicle child = new Vehicle(track.getStart(), v.getStartVelocity(), v.getBrain(), mutationRate);
 
 		child.mutate();
 		return child;
 	}
 
-	private void calculateFitness() {
+	@Synchronized
+	private void calculateFitness() throws ArithmeticException {
 		for (Vehicle v : savedVehicles)
 			v.calculateFitness();
 		double sum = 0;
 		for (Vehicle v : savedVehicles)
 			sum += v.getFitness();
+		if (sum == 0)
+			throw new ArithmeticException("Could not calculate fitness");
 		for (Vehicle v : savedVehicles) {
 			v.setFitness(v.getFitness() / sum);
 		}
-	}
-
-	public int getGenerationCount() {
-		return generation_count;
-	}
-
-	public void saveModel() {
-		if (bestV != null) {
-			try {
-				bestV.getBrain().serialize();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public void loadModel() {
-		JFileChooser chooser = new JFileChooser(new File(".").getAbsolutePath());
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("Neural Network files", "nn");
-		chooser.setFileFilter(filter);
-		int returnVal = chooser.showOpenDialog(null);
-		GenericNeuralNetwork nn = new GenericNeuralNetwork(6, 12, 2, 0, MUTAION_RATE);
-		try {
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				File f = chooser.getSelectedFile();
-				nn = (GenericNeuralNetwork) GenericNeuralNetwork.deserialize(f);
-			}
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
-		}
-		for (int i = population.size() - 1; i >= 0; i--) {
-			population.get(i).setBrain(nn.copy());
-		}
-	}
-
-	double map(double value, double inputMin, double inputMax, double outputMin, double outputMax) {
-		return outputMin + (outputMax - outputMin) * ((value - inputMin) / (inputMax - inputMin));
 	}
 
 }

@@ -1,9 +1,6 @@
-package main.java.com.JayPi4c.NeuroEvolution.model;
+package com.JayPi4c.NeuroEvolution.model;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-
-import main.java.com.JayPi4c.NeuroEvolution.util.PVector;
+import com.JayPi4c.NeuroEvolution.util.PVector;
 
 public class Ray {
 	private PVector pos;
@@ -15,20 +12,13 @@ public class Ray {
 	}
 
 	public void setAngle(double angle) {
-		this.dir = PVector.fromAngle(angle);
+		dir = PVector.fromAngle(angle);
 	}
 
 	public void lookAt(double x, double y) {
-		dir.x = x - this.pos.x;
-		dir.y = y - this.pos.y;
+		dir.x = x - pos.x;
+		dir.y = y - pos.y;
 		dir.normalize();
-	}
-
-	public void show(Graphics2D g) {
-		g.setColor(new Color(0, 0, 0, 150));
-		g.translate((int) pos.x, (int) pos.y);
-		g.drawLine(0, 0, (int) (dir.x * GeneticAlgorithm.SIGHT), (int) (dir.y * GeneticAlgorithm.SIGHT));
-		g.translate((int) -pos.x, (int) -pos.y);
 	}
 
 	public PVector cast(Boundary wall) {
@@ -50,14 +40,13 @@ public class Ray {
 		double t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / den;
 		double u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / den;
 		if (t > 0 && t < 1 && u > 0) {
-			PVector pt = new PVector(x1 + t * (x2 - x1), y1 + t * (y2 - y1));
-			return pt;
+			return new PVector(x1 + t * (x2 - x1), y1 + t * (y2 - y1));
 		} else {
 			return null;
 		}
 	}
 
 	public PVector getDirection() {
-		return this.dir.copy();
+		return dir.copy();
 	}
 }
