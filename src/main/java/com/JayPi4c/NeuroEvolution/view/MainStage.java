@@ -3,6 +3,7 @@ package com.JayPi4c.NeuroEvolution.view;
 import com.JayPi4c.NeuroEvolution.controller.MainStageController;
 import com.JayPi4c.NeuroEvolution.controller.SimulationController;
 import com.JayPi4c.NeuroEvolution.model.GeneticAlgorithm;
+import com.jfoenix.controls.JFXButton;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,6 +11,8 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToolBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -42,6 +45,25 @@ public class MainStage extends Stage {
 	private int mainStageHeight = 500;
 
 	private GeneticAlgorithm geneticAlgorithm;
+
+	@Getter
+	private static final Image startImage;
+	@Getter
+	private static final Image pauseImage;
+	@Getter
+	private static final Image stopImage;
+	@Getter
+	private static final Image resetImage;
+
+	static {
+		log.debug("Loading stage images");
+
+		startImage = new Image("/img/Play24.gif");
+		pauseImage = new Image("/img/Pause24.gif");
+		stopImage = new Image("/img/Stop24.gif");
+		resetImage = new Image("/img/Reset24.png");
+	}
+
 
 	public MainStage() {
 		setTitle("Neuro Evolution Demo");
@@ -81,9 +103,9 @@ public class MainStage extends Stage {
 	private void createToolbar() {
 		log.debug("Creating Toolbar");
 
-		resetButtonToolbar = new Button("R");
-		startButtonToolbar = new Button("S");
-		pauseButtonToolbar = new Button("P");
+		resetButtonToolbar = new JFXButton(null, new ImageView(resetImage));
+		startButtonToolbar = new JFXButton(null, new ImageView(startImage));
+		pauseButtonToolbar = new JFXButton(null, new ImageView(pauseImage));
 		toolBar = new ToolBar(startButtonToolbar, pauseButtonToolbar, resetButtonToolbar);
 	}
 
