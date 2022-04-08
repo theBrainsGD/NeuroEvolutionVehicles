@@ -1,4 +1,4 @@
-package com.JayPi4c;
+package main.java.com.JayPi4c.NeuroEvolution.model;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -8,6 +8,10 @@ import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import com.JayPi4c.GenericNeuralNetwork;
+
+import main.java.com.JayPi4c.NeuroEvolution.view.ContentPanel;
 
 public class GeneticAlgorithm {
 

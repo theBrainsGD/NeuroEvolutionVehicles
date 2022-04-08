@@ -1,4 +1,4 @@
-package com.JayPi4c.utils;
+package main.java.com.JayPi4c.NeuroEvolution.util;
 
 /* -*- mode: java; c-basic-offset: 2; indent-tabs-mode: nil -*- */
 

@@ -1,10 +1,13 @@
-package com.JayPi4c;
+package main.java.com.JayPi4c.NeuroEvolution.model;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-import com.JayPi4c.utils.PVector;
+import com.JayPi4c.GenericNeuralNetwork;
+
+import main.java.com.JayPi4c.NeuroEvolution.util.PVector;
+import main.java.com.JayPi4c.NeuroEvolution.view.ContentPanel;
 
 public class Vehicle {
 	public static final double MAX_SPEED = 5;

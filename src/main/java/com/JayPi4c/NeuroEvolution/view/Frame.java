@@ -1,4 +1,4 @@
-package com.JayPi4c;
+package main.java.com.JayPi4c.NeuroEvolution.view;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -6,6 +6,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
+
+import main.java.com.JayPi4c.NeuroEvolution.model.GeneticAlgorithm;
 
 public class Frame extends JFrame {
 

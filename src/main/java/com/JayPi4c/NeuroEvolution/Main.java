@@ -1,4 +1,6 @@
-package com.JayPi4c;
+package com.JayPi4c.NeuroEvolution;
+
+import main.java.com.JayPi4c.NeuroEvolution.view.Frame;
 
 public class Main {
 	public static void main(String args[]) {

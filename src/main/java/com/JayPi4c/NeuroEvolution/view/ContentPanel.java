@@ -1,4 +1,4 @@
-package com.JayPi4c;
+package main.java.com.JayPi4c.NeuroEvolution.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,6 +7,9 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
+
+import main.java.com.JayPi4c.NeuroEvolution.model.GeneticAlgorithm;
+import main.java.com.JayPi4c.NeuroEvolution.model.Track;
 
 public class ContentPanel extends JPanel {
 

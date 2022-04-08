@@ -14,7 +14,7 @@
  *   will be the same when ported to other languages.
  */
 
-package com.JayPi4c.utils;
+package main.java.com.JayPi4c.NeuroEvolution.util;
 
 public class OpenSimplexNoise {
 

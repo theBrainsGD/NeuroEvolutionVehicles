@@ -1,10 +1,11 @@
-package com.JayPi4c;
+package main.java.com.JayPi4c.NeuroEvolution.model;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-import com.JayPi4c.utils.OpenSimplexNoise;
-import com.JayPi4c.utils.PVector;
+import main.java.com.JayPi4c.NeuroEvolution.util.OpenSimplexNoise;
+import main.java.com.JayPi4c.NeuroEvolution.util.PVector;
+import main.java.com.JayPi4c.NeuroEvolution.view.ContentPanel;
 
 public class Track {
 	public static final int PARTS = 120;

@@ -1,9 +1,9 @@
-package com.JayPi4c;
+package main.java.com.JayPi4c.NeuroEvolution.model;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import com.JayPi4c.utils.PVector;
+import main.java.com.JayPi4c.NeuroEvolution.util.PVector;
 
 public class Boundary {
 	private PVector a, b;
