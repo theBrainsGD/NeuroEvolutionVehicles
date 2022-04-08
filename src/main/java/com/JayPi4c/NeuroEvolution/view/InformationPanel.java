@@ -5,27 +5,24 @@ import com.JayPi4c.NeuroEvolution.util.Observable;
 import com.JayPi4c.NeuroEvolution.util.Observer;
 
 import javafx.application.Platform;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 public class InformationPanel extends Pane implements Observer {
 
-	private TextField generationCount;
-	private TextField currentScore;
-	private TextField bestFitness;
+	private Label generationCount;
+	private Label currentScore;
+	private Label bestFitness;
 
 	public InformationPanel(GeneticAlgorithm ga) {
 		ga.addObserver(this);
-		generationCount = new TextField("gen: #0");
+		generationCount = new Label("gen: #0");
 		generationCount.setPrefWidth(70);
-		generationCount.setEditable(false);
-		currentScore = new TextField("Score: ");
+		currentScore = new Label("Score: ");
 		currentScore.setPrefWidth(75);
-		currentScore.setEditable(false);
-		bestFitness = new TextField("max Fit:");
+		bestFitness = new Label("max Fit:");
 		bestFitness.setPrefWidth(80);
-		bestFitness.setEditable(false);
 		var hBox = new HBox(generationCount, currentScore, bestFitness);
 		getChildren().add(hBox);
 

@@ -1,9 +1,13 @@
 package com.JayPi4c.NeuroEvolution.view;
 
+import com.JayPi4c.NeuroEvolution.controller.LanguageController;
 import com.JayPi4c.NeuroEvolution.controller.MainStageController;
 import com.JayPi4c.NeuroEvolution.controller.SimulationController;
 import com.JayPi4c.NeuroEvolution.model.GeneticAlgorithm;
+import com.JayPi4c.NeuroEvolution.view.drawer.Drawer;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDrawersStack;
+import com.jfoenix.controls.JFXHamburger;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,6 +17,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -25,6 +30,7 @@ public class MainStage extends Stage {
 
 	private MainStageController mainStageController;
 	private SimulationController simulationController;
+	private LanguageController languageController;
 
 	private MenuBar menuBar;
 	private Menu settingsMenu;
@@ -32,9 +38,16 @@ public class MainStage extends Stage {
 	private MenuItem loadModel;
 
 	private ToolBar toolBar;
+
+	private JFXHamburger hamburger;
+
 	private Button resetButtonToolbar;
 	private Button startButtonToolbar;
 	private Button pauseButtonToolbar;
+
+	// drawer
+	private JFXDrawersStack drawersStack;
+	private Drawer drawer;
 
 	private InformationPanel informationPanel;
 	private MainPanel mainPanel;
@@ -64,7 +77,6 @@ public class MainStage extends Stage {
 		resetImage = new Image("/img/Reset24.png");
 	}
 
-
 	public MainStage() {
 		setTitle("Neuro Evolution Demo");
 
@@ -72,19 +84,24 @@ public class MainStage extends Stage {
 
 		createMenubar();
 		createToolbar();
-
-		mainStageController = new MainStageController(this);
-		simulationController = new SimulationController(this, geneticAlgorithm);
+		createDrawer();
 
 		mainPanel = new MainPanel(geneticAlgorithm);
 		StackPane holder = new StackPane(mainPanel);
 		informationPanel = new InformationPanel(geneticAlgorithm);
 		var vbox = new VBox(menuBar, toolBar, informationPanel, holder);
 
-		mainStageScene = new Scene(vbox);
+		drawersStack = new JFXDrawersStack();
+		drawersStack.setContent(vbox);
+
+		mainStageScene = new Scene(drawersStack);
 		setScene(mainStageScene);
 
 		mainPanel.paint();
+
+		mainStageController = new MainStageController(this);
+		simulationController = new SimulationController(this, geneticAlgorithm);
+		languageController = new LanguageController(this);
 
 		setResizable(false);
 		show();
@@ -100,13 +117,25 @@ public class MainStage extends Stage {
 		menuBar = new MenuBar(settingsMenu);
 	}
 
+	private void createDrawer() {
+		log.debug("Creating Drawer");
+
+		drawer = new Drawer();
+	}
+
 	private void createToolbar() {
 		log.debug("Creating Toolbar");
+
+		hamburger = new JFXHamburger();
+		hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
+			log.debug("Toggle menu");
+			drawersStack.toggle(drawer);
+		});
 
 		resetButtonToolbar = new JFXButton(null, new ImageView(resetImage));
 		startButtonToolbar = new JFXButton(null, new ImageView(startImage));
 		pauseButtonToolbar = new JFXButton(null, new ImageView(pauseImage));
-		toolBar = new ToolBar(startButtonToolbar, pauseButtonToolbar, resetButtonToolbar);
+		toolBar = new ToolBar(hamburger, startButtonToolbar, pauseButtonToolbar, resetButtonToolbar);
 	}
 
 }
