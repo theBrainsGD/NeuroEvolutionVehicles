@@ -70,6 +70,9 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode
 public class PVector implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * ( begin auto-generated from PVector_x.xml )
 	 *
