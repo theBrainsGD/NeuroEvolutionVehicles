@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.JayPi4c.NeuroEvolution.model.Boundary;
 import com.JayPi4c.NeuroEvolution.model.GeneticAlgorithm;
-import com.JayPi4c.NeuroEvolution.model.Track;
 import com.JayPi4c.NeuroEvolution.model.Vehicle;
+import com.JayPi4c.NeuroEvolution.model.track.Track;
 import com.JayPi4c.NeuroEvolution.util.Observable;
 import com.JayPi4c.NeuroEvolution.util.Observer;
 

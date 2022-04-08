@@ -3,6 +3,8 @@ package com.JayPi4c.NeuroEvolution.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.JayPi4c.NeuroEvolution.model.track.Track;
+import com.JayPi4c.NeuroEvolution.model.track.TrackFactory;
 import com.JayPi4c.NeuroEvolution.util.Observable;
 
 import lombok.Getter;
@@ -27,12 +29,17 @@ public class GeneticAlgorithm extends Observable {
 
 	private Vehicle prevBest;
 
-	public GeneticAlgorithm() {
+	private int panelWidth;
+	private int panelHeight;
+
+	public GeneticAlgorithm(int panelWidth, int panelHeight) {
 		reset();
+		this.panelWidth = panelWidth;
+		this.panelHeight = panelHeight;
 	}
 
 	public void reset() {
-		this.track = new Track();
+		this.track = TrackFactory.createTrack(TrackFactory.CONVEX_HULL, panelWidth, panelHeight);
 		track.buildTrack();
 		generationCount = 0;
 		prevBest = null;

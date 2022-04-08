@@ -46,7 +46,7 @@ public class MainStage extends Stage {
 	public MainStage() {
 		setTitle("Neuro Evolution Demo");
 
-		geneticAlgorithm = new GeneticAlgorithm();
+		geneticAlgorithm = new GeneticAlgorithm(mainStageWidth, mainStageWidth);
 
 		createMenubar();
 		createToolbar();

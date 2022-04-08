@@ -77,10 +77,10 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>com.JayPi4c.RobbiSimulator.Launcher</mainClass>
+							<mainClass>com.JayPi4c.NeuroEvolution.Launcher</mainClass>
 						</manifest>
 					</archive>
-					<finalName>RobbiSimulator</finalName>
+					<finalName>NeuroEvolutionDemo</finalName>
 					<appendAssemblyId>false</appendAssemblyId>
 				</configuration>
 				<executions>
@@ -120,6 +120,11 @@
 			<version>${javafx.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>com.jfoenix</groupId>
+			<artifactId>jfoenix</artifactId>
+			<version>9.0.1</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
 			<version>2.17.1</version>
@@ -139,6 +144,5 @@
 			<artifactId>gdx</artifactId>
 			<version>1.10.0</version>
 		</dependency>
-
 	</dependencies>
 </project>
