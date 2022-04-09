@@ -31,6 +31,9 @@ public class LanguageController {
 
 		// cards
 		stage.getDrawer().getTrackCard().getHeader().textProperty().bind(createBinding("drawer.card.track.header"));
+		stage.getDrawer().getTrackCard().getPerlinTrackLabel().textProperty().bind(createBinding("drawer.card.track.perlin"));
+		stage.getDrawer().getTrackCard().getConvexHullLabel().textProperty().bind(createBinding("drawer.card.track.convexHull"));
+
 		stage.getDrawer().getGeneticAlgorithmCard().getHeader().textProperty()
 				.bind(createBinding("drawer.card.geneticAlgorithm.header"));
 		stage.getDrawer().getLanguageCard().getHeader().textProperty()

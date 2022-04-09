@@ -26,7 +26,9 @@ public class GeneticAlgorithm extends Observable {
 	private ArrayList<Vehicle> population;
 	private ArrayList<Vehicle> savedVehicles;
 
-	@Setter
+	private final Object trackLock = new Object();
+
+	@Getter(onMethod_ = { @Synchronized("trackLock") })
 	private Track track;
 
 	private Vehicle prevBest;
@@ -34,21 +36,33 @@ public class GeneticAlgorithm extends Observable {
 	private int panelWidth;
 	private int panelHeight;
 
+	@Synchronized("trackLock")
+	public void setTrack(Track track) {
+		this.track = track;
+		reset();
+	}
+
 	public GeneticAlgorithm(int panelWidth, int panelHeight) {
+		synchronized (trackLock) {
+			this.track = TrackFactory.createTrack(TrackFactory.CONVEX_HULL, panelWidth, panelHeight);
+		}
 		reset();
 		this.panelWidth = panelWidth;
 		this.panelHeight = panelHeight;
 	}
 
 	public void reset() {
-		this.track = TrackFactory.createTrack(TrackFactory.CONVEX_HULL, panelWidth, panelHeight);
-		track.buildTrack();
-		generationCount = 0;
-		prevBest = null;
-		population = new ArrayList<>();
-		savedVehicles = new ArrayList<>();
-		for (int i = 0; i < populationSize; i++) {
-			population.add(new Vehicle(track.getStart(), null, null, mutationRate));
+		synchronized (trackLock) {
+			track.buildTrack();
+
+			generationCount = 0;
+			prevBest = null;
+			population = new ArrayList<>();
+			savedVehicles = new ArrayList<>();
+
+			for (int i = 0; i < populationSize; i++) {
+				population.add(new Vehicle(track.getStart(), null, null, mutationRate));
+			}
 		}
 	}
 
