@@ -41,7 +41,13 @@ public class Vehicle {
 
 	private GenericNeuralNetwork brain;
 
-	// TODO change initial velocity to be perpendicular to the first checkpoint
+	/**
+	 * 
+	 * @param start
+	 * @param startVel represents the initial facing. Should be perpendicular to the first checkpoint
+	 * @param nn
+	 * @param mutationRate
+	 */
 	public Vehicle(PVector start, PVector startVel, GenericNeuralNetwork nn, double mutationRate) {
 		id = UUID.randomUUID();
 		checkPointFitness = 0;
@@ -51,6 +57,8 @@ public class Vehicle {
 		dead = false;
 		checkpointIndex = 0;
 		pos = start.copy();
+
+
 		if (startVel == null)
 			vel = new PVector(Math.random() * 2 - 1, Math.random() * 2 - 1);
 		else

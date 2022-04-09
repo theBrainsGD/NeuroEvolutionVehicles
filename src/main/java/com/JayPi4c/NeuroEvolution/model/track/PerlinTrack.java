@@ -73,6 +73,15 @@ public class PerlinTrack implements Track {
         return boundaries;
     }
 
+    @Override
+    public PVector getStartVelocity() {
+        Boundary boundary = checkpoints.get(0);
+		PVector v = PVector.sub(boundary.getA(), boundary.getB());
+		v.rotate(-Math.PI * 0.5);
+		v.normalize();
+		return v;
+    }
+
     /**
      * taken from Processing
      * 

@@ -6,9 +6,9 @@ import java.util.List;
 import com.JayPi4c.NeuroEvolution.model.track.Track;
 import com.JayPi4c.NeuroEvolution.model.track.TrackFactory;
 import com.JayPi4c.NeuroEvolution.util.Observable;
+import com.JayPi4c.NeuroEvolution.util.PVector;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.Synchronized;
 import lombok.extern.slf4j.Slf4j;
 
@@ -52,18 +52,23 @@ public class GeneticAlgorithm extends Observable {
 	}
 
 	public void reset() {
+		generationCount = 0;
+		prevBest = null;
+		population = new ArrayList<>();
+		savedVehicles = new ArrayList<>();
+
 		synchronized (trackLock) {
 			track.buildTrack();
 
-			generationCount = 0;
-			prevBest = null;
-			population = new ArrayList<>();
-			savedVehicles = new ArrayList<>();
-
 			for (int i = 0; i < populationSize; i++) {
-				population.add(new Vehicle(track.getStart(), null, null, mutationRate));
+				population.add(new Vehicle(track.getStart(), getStartVelocity(), null, mutationRate));
 			}
 		}
+	}
+
+	@Synchronized("trackLock")
+	private PVector getStartVelocity() {
+		return track.getStartVelocity();
 	}
 
 	public synchronized List<Vehicle> getPopulation() {
@@ -122,7 +127,7 @@ public class GeneticAlgorithm extends Observable {
 				best = v;
 			}
 		}
-		Vehicle v = new Vehicle(track.getStart(), best.getStartVelocity(), best.getBrain(), mutationRate);
+		Vehicle v = new Vehicle(track.getStart(), getStartVelocity(), best.getBrain(), mutationRate);
 		v.setId(best.getId());
 		return v;
 	}
@@ -136,7 +141,7 @@ public class GeneticAlgorithm extends Observable {
 		}
 		index--;
 		Vehicle v = savedVehicles.get(index);
-		Vehicle child = new Vehicle(track.getStart(), v.getStartVelocity(), v.getBrain(), mutationRate);
+		Vehicle child = new Vehicle(track.getStart(), getStartVelocity(), v.getBrain(), mutationRate);
 
 		child.mutate();
 		return child;

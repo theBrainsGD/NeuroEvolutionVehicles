@@ -20,4 +20,10 @@ public interface Track {
     public ArrayList<Boundary> getCheckpoints();
 
     public ArrayList<Boundary> getWalls();
+
+    /**
+     * Retuns a PVector which points into the direction the vehicles should drive.
+     * @return
+     */
+    public PVector getStartVelocity();
 }

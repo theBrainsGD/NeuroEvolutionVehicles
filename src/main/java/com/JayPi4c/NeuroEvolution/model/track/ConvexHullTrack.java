@@ -11,7 +11,7 @@ import lombok.Getter;
 
 public class ConvexHullTrack implements Track {
 
-    private int checkpointDivider = 30;
+    private int checkpointDivider = 90;
     private int halfTrackWidth = 30;
     private int panelWidth;
     private int panelHeight;
@@ -99,7 +99,7 @@ public class ConvexHullTrack implements Track {
             PVector inner = PVector.add(v, p);
             ptsInner.add(inner);
             ptsOuter.add(outer);
-            if (i % (checkpointDivider * 4) == 0)
+            if (i % checkpointDivider == 0)
                 checkpoints.add(new Boundary(inner.x, inner.y, outer.x, outer.y));
         }
         start = checkpoints.get(0).midPoint();
@@ -207,6 +207,15 @@ public class ConvexHullTrack implements Track {
             boundaries.add(new Boundary(p1.x, p1.y, p2.x, p2.y));
         }
         return boundaries;
+    }
+
+    @Override
+    public PVector getStartVelocity() {
+        Boundary boundary = checkpoints.get(0);
+		PVector v = PVector.sub(boundary.getA(), boundary.getB());
+		v.rotate(Math.PI * 0.5);
+		v.normalize();
+		return v;
     }
 
 }

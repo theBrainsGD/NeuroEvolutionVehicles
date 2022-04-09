@@ -3,10 +3,13 @@ package com.JayPi4c.NeuroEvolution.controller;
 import com.JayPi4c.NeuroEvolution.model.GeneticAlgorithm;
 import com.JayPi4c.NeuroEvolution.view.MainStage;
 
+import javafx.application.Platform;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class SimulationController {
+
+	private MainStage mainStage;
 
 	private GeneticAlgorithm ga;
 
@@ -16,6 +19,7 @@ public class SimulationController {
 
 	public SimulationController(MainStage mainStage, GeneticAlgorithm ga) {
 		this.ga = ga;
+		this.mainStage = mainStage;
 		mainStage.getStartButtonToolbar().setOnAction(e -> {
 			if (!isSimulationRunning())
 				start();
@@ -28,17 +32,19 @@ public class SimulationController {
 	}
 
 	public void pause() {
-		if (isSimulationRunning())
+		if (isSimulationRunning()){
 			simulation.setPaused(true);
+			disableButtonStates(false, true);
+		}
 	}
 
 	public void start() {
 		log.debug("Starting new simulation");
 		simulationRunning = true;
-		ga.reset();
 		simulation = new Simulation(ga, this);
 		simulation.setDaemon(true);
 		simulation.start();
+		disableButtonStates(true, false);
 	}
 
 	public void resume() {
@@ -47,6 +53,7 @@ public class SimulationController {
 			synchronized (simulation.getLock()) {
 				simulation.getLock().notifyAll();
 			}
+			disableButtonStates(true, false);
 		}
 	}
 
@@ -58,11 +65,13 @@ public class SimulationController {
 			synchronized (simulation.getLock()) {
 				simulation.getLock().notifyAll();
 			}
+			disableButtonStates(false, true);
 		}
 	}
 
 	public void reset() {
 		stop();
+		ga.reset();
 		start();
 	}
 
@@ -72,6 +81,18 @@ public class SimulationController {
 
 	public void finish() {
 		log.debug("finishing the simulation");
+	}
+
+	private void disableButtonStates(boolean start, boolean pause) {
+		if (!Platform.isFxApplicationThread()) {
+			Platform.runLater(() -> {
+				mainStage.getStartButtonToolbar().setDisable(start);
+				mainStage.getPauseButtonToolbar().setDisable(pause);
+			});
+		} else {
+			mainStage.getStartButtonToolbar().setDisable(start);
+			mainStage.getPauseButtonToolbar().setDisable(pause);
+		}
 	}
 
 }
