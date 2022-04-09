@@ -75,6 +75,9 @@ public class GeneticAlgorithm extends Observable {
 		return population;
 	}
 
+	/**
+	 * Make method multi-threaded
+	 */
 	public void update() {
 		synchronized (this) {
 

@@ -29,13 +29,15 @@ public class ConvexHullTrack implements Track {
     /**
      * Constructor for ConvexHullTrack.
      * <br>
-     * The buildTrack() method will construct the track in the way which is discribed on this website:
-     * <a href="https://www.gamedeveloper.com/programming/generating-procedural-racetracks">gamedeveloper.com</a>
+     * The buildTrack() method will construct the track in the way which is
+     * discribed on this website:
+     * <a href=
+     * "https://www.gamedeveloper.com/programming/generating-procedural-racetracks">gamedeveloper.com</a>
      * 
      * @param panelWidth
-     *           The width of the panel
+     *                    The width of the panel
      * @param panelHeight
-     *          The height of the panel
+     *                    The height of the panel
      */
     protected ConvexHullTrack(int panelWidth, int panelHeight) {
         this.panelWidth = panelWidth;
@@ -83,6 +85,13 @@ public class ConvexHullTrack implements Track {
         for (int i = 0; i < pushIterations; i++) {
             pushApart(hull);
         }
+
+        /*
+         * for (int i = 0; i < 10; i++) {
+         * fixAngles(hull);
+         * pushApart(hull);
+         * }
+         */
 
         hull = smoothTrack(hull);
 
@@ -194,6 +203,42 @@ public class ConvexHullTrack implements Track {
         }
     }
 
+    /*
+     * private void fixAngles(ArrayList<PVector> dataSet) {
+     * for (int i = 0; i < dataSet.size(); i++) {
+     * int previous = (i - 1 < 0 ? dataSet.size() - 1 : i - 1);
+     * PVector toPrevious = PVector.sub(dataSet.get(previous), dataSet.get(i));
+     * toPrevious.normalize();
+     * int next = (i + 1) % dataSet.size();
+     * PVector toNext = PVector.sub(dataSet.get(next), dataSet.get(i));
+     * toNext.normalize();
+     * // I got a vector to the next and to the previous point, normalized.
+     * 
+     * double a = PVector.dot(toPrevious, toNext);
+     * // perp dot product between the previous and next point. Google it you should
+     * // learn about it!
+     * 
+     * double deg = Math.abs(Math.toDegrees(a));
+     * deg = Math.toDegrees(PVector.angleBetween(toPrevious, toNext));
+     * 
+     * if (deg <= 180)
+     * continue;
+     * double nA = 100 * Math.signum(a) * (180d / Math.PI);
+     * double diff = nA - a;
+     * double cos = Math.cos(diff);
+     * double sin = Math.sin(diff);
+     * PVector newVec = new PVector(toNext.x * cos - toNext.y * sin, toNext.x * sin
+     * + toNext.y * cos);
+     * newVec.normalize();
+     * dataSet.get(next).x = dataSet.get(i).x + newVec.x;
+     * dataSet.get(next).y = dataSet.get(i).y + newVec.y;
+     * // I got the difference between the current angle and 100degrees, and built a
+     * // new vector that puts the next point at 100 degrees.
+     * 
+     * }
+     * }
+     */
+
     private double dst2(PVector p1, PVector p2) {
         return (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y);
     }
@@ -212,10 +257,10 @@ public class ConvexHullTrack implements Track {
     @Override
     public PVector getStartVelocity() {
         Boundary boundary = checkpoints.get(0);
-		PVector v = PVector.sub(boundary.getA(), boundary.getB());
-		v.rotate(Math.PI * 0.5);
-		v.normalize();
-		return v;
+        PVector v = PVector.sub(boundary.getA(), boundary.getB());
+        v.rotate(Math.PI * 0.5);
+        v.normalize();
+        return v;
     }
 
 }
