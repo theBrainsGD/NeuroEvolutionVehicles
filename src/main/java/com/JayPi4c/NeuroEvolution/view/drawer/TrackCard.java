@@ -6,10 +6,11 @@ import javafx.scene.layout.VBox;
 import lombok.Getter;
 
 @Getter
-public class CardTwo extends Pane {
+public class TrackCard extends Pane {
+
     private Label header;
 
-    public CardTwo() {
+    public TrackCard() {
         header = new Label();
 
         var vBox = new VBox(header);

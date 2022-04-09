@@ -6,15 +6,14 @@ import javafx.scene.layout.VBox;
 import lombok.Getter;
 
 @Getter
-public class CardOne extends Pane {
+public class GeneticAlgorithmCard extends Pane {
 
     private Label header;
 
-    public CardOne() {
+    public GeneticAlgorithmCard() {
         header = new Label();
 
         var vBox = new VBox(header);
         getChildren().add(vBox);
     }
-
 }

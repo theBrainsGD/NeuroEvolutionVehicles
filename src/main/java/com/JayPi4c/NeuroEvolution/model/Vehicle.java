@@ -41,6 +41,7 @@ public class Vehicle {
 
 	private GenericNeuralNetwork brain;
 
+	// TODO change initial velocity to be perpendicular to the first checkpoint
 	public Vehicle(PVector start, PVector startVel, GenericNeuralNetwork nn, double mutationRate) {
 		id = UUID.randomUUID();
 		checkPointFitness = 0;

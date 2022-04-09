@@ -23,14 +23,16 @@ public class LanguageController {
 		stage.titleProperty().bind(createBinding("main.title"));
 
 		// drawer
-		stage.getDrawer().getDrawerPaneOneButton().textProperty().bind(createBinding("drawer.one"));
-		stage.getDrawer().getDrawerPaneTwoButton().textProperty().bind(createBinding("drawer.two"));
+		stage.getDrawer().getDrawerPaneTrackButton().textProperty().bind(createBinding("drawer.track"));
+		stage.getDrawer().getDrawerPaneGeneticAlgorithmButton().textProperty()
+				.bind(createBinding("drawer.geneticAlgorithm"));
 		stage.getDrawer().getDrawerPaneLanguageButton().textProperty().bind(createBinding("drawer.language"));
 		stage.getDrawer().getDrawerDoneButton().textProperty().bind(createBinding("drawer.done"));
 
 		// cards
-		stage.getDrawer().getCardOne().getHeader().textProperty().bind(createBinding("drawer.card.one.header"));
-		stage.getDrawer().getCardTwo().getHeader().textProperty().bind(createBinding("drawer.card.two.header"));
+		stage.getDrawer().getTrackCard().getHeader().textProperty().bind(createBinding("drawer.card.track.header"));
+		stage.getDrawer().getGeneticAlgorithmCard().getHeader().textProperty()
+				.bind(createBinding("drawer.card.geneticAlgorithm.header"));
 		stage.getDrawer().getLanguageCard().getHeader().textProperty()
 				.bind(createBinding("drawer.card.language.header"));
 		stage.getDrawer().getLanguageCard().getEnglishButton().textProperty()

@@ -1,8 +1,10 @@
 package com.JayPi4c.NeuroEvolution.view;
 
+import com.JayPi4c.NeuroEvolution.controller.GeneticAlgorithmCardController;
 import com.JayPi4c.NeuroEvolution.controller.LanguageController;
 import com.JayPi4c.NeuroEvolution.controller.MainStageController;
 import com.JayPi4c.NeuroEvolution.controller.SimulationController;
+import com.JayPi4c.NeuroEvolution.controller.TrackCardController;
 import com.JayPi4c.NeuroEvolution.model.GeneticAlgorithm;
 import com.JayPi4c.NeuroEvolution.view.drawer.Drawer;
 import com.jfoenix.controls.JFXButton;
@@ -17,7 +19,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -30,7 +31,10 @@ public class MainStage extends Stage {
 
 	private MainStageController mainStageController;
 	private SimulationController simulationController;
+
 	private LanguageController languageController;
+	private TrackCardController trackCardController;
+	private GeneticAlgorithmCardController geneticAlgorithmCardController;
 
 	private MenuBar menuBar;
 	private Menu settingsMenu;
@@ -78,7 +82,6 @@ public class MainStage extends Stage {
 	}
 
 	public MainStage() {
-		setTitle("Neuro Evolution Demo");
 
 		geneticAlgorithm = new GeneticAlgorithm(mainStageWidth, mainStageWidth);
 
@@ -101,7 +104,10 @@ public class MainStage extends Stage {
 
 		mainStageController = new MainStageController(this);
 		simulationController = new SimulationController(this, geneticAlgorithm);
+
 		languageController = new LanguageController(this);
+		trackCardController = new TrackCardController(this);
+		geneticAlgorithmCardController = new GeneticAlgorithmCardController(this);
 
 		setResizable(false);
 		show();
@@ -127,10 +133,6 @@ public class MainStage extends Stage {
 		log.debug("Creating Toolbar");
 
 		hamburger = new JFXHamburger();
-		hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
-			log.debug("Toggle menu");
-			drawersStack.toggle(drawer);
-		});
 
 		resetButtonToolbar = new JFXButton(null, new ImageView(resetImage));
 		startButtonToolbar = new JFXButton(null, new ImageView(startImage));

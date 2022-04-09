@@ -8,6 +8,7 @@ import com.JayPi4c.NeuroEvolution.model.track.TrackFactory;
 import com.JayPi4c.NeuroEvolution.util.Observable;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.Synchronized;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,6 +26,7 @@ public class GeneticAlgorithm extends Observable {
 	private ArrayList<Vehicle> population;
 	private ArrayList<Vehicle> savedVehicles;
 
+	@Setter
 	private Track track;
 
 	private Vehicle prevBest;
