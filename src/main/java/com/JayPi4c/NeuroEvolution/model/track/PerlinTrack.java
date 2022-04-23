@@ -1,12 +1,12 @@
 package com.JayPi4c.NeuroEvolution.model.track;
 
-import java.util.ArrayList;
-
 import com.JayPi4c.NeuroEvolution.model.Boundary;
 import com.JayPi4c.NeuroEvolution.util.OpenSimplexNoise;
 import com.JayPi4c.NeuroEvolution.util.PVector;
-
 import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PerlinTrack implements Track {
 
@@ -23,9 +23,9 @@ public class PerlinTrack implements Track {
     private PVector end;
 
     @Getter
-    private ArrayList<Boundary> walls;
+    private List<Boundary> walls;
     @Getter
-    private ArrayList<Boundary> checkpoints;
+    private List<Boundary> checkpoints;
 
     protected PerlinTrack(int panelWidth, int panelHeight) {
         this.panelWidth = panelWidth;
@@ -55,22 +55,11 @@ public class PerlinTrack implements Track {
 
         }
         walls = new ArrayList<>();
-        walls.addAll(createBoundaries(ptsInner, true));
-        walls.addAll(createBoundaries(ptsOuter, true));
+        walls.addAll(Boundary.createBoundaries(ptsInner, true));
+        walls.addAll(Boundary.createBoundaries(ptsOuter, true));
 
         start = checkpoints.get(0).midPoint();
         end = checkpoints.get(checkpoints.size() - 1).midPoint();
-    }
-
-    private ArrayList<Boundary> createBoundaries(ArrayList<PVector> pts, boolean closed) {
-        ArrayList<Boundary> boundaries = new ArrayList<>();
-
-        for (int i = 0; i < pts.size() - (closed ? 0 : 1); i++) {
-            PVector p1 = pts.get(i);
-            PVector p2 = pts.get((i + 1) % pts.size());
-            boundaries.add(new Boundary(p1.x, p1.y, p2.x, p2.y));
-        }
-        return boundaries;
     }
 
     @Override
