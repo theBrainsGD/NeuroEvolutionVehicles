@@ -1,9 +1,9 @@
 package com.JayPi4c.NeuroEvolution.model.track;
 
-import java.util.ArrayList;
-
 import com.JayPi4c.NeuroEvolution.model.Boundary;
 import com.JayPi4c.NeuroEvolution.util.PVector;
+
+import java.util.List;
 
 public interface Track {
 
@@ -17,12 +17,13 @@ public interface Track {
 
     public PVector getEnd();
 
-    public ArrayList<Boundary> getCheckpoints();
+    public List<Boundary> getCheckpoints();
 
-    public ArrayList<Boundary> getWalls();
+    public List<Boundary> getWalls();
 
     /**
-     * Retuns a PVector which points into the direction the vehicles should drive.
+     * Returns a PVector which points into the direction the vehicles should drive.
+     *
      * @return
      */
     public PVector getStartVelocity();

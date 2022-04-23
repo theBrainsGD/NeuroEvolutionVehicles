@@ -2,7 +2,6 @@ package com.JayPi4c.NeuroEvolution.controller;
 
 import com.JayPi4c.NeuroEvolution.model.track.TrackFactory;
 import com.JayPi4c.NeuroEvolution.view.MainStage;
-
 import javafx.scene.control.ToggleGroup;
 
 public class TrackCardController {
@@ -21,5 +20,10 @@ public class TrackCardController {
                         panelWidth, panelHeight)));
         mainStage.getDrawer().getTrackCard().getConvexHullToggle().setToggleGroup(toggleGroup);
         mainStage.getDrawer().getTrackCard().getConvexHullToggle().setSelected(true);
+
+        mainStage.getDrawer().getTrackCard().getPartTrackToggle().setOnAction(
+                event -> mainStage.getGeneticAlgorithm().setTrack(TrackFactory.createTrack(TrackFactory.PART_TRACK,
+                        panelWidth, panelHeight)));
+        mainStage.getDrawer().getTrackCard().getPartTrackToggle().setToggleGroup(toggleGroup);
     }
 }

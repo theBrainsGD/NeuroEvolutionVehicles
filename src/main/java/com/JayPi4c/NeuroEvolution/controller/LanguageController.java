@@ -1,14 +1,13 @@
 package com.JayPi4c.NeuroEvolution.controller;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 import com.JayPi4c.NeuroEvolution.util.I18nUtils;
 import com.JayPi4c.NeuroEvolution.view.MainStage;
-
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.scene.control.Tooltip;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class LanguageController {
 
@@ -33,6 +32,7 @@ public class LanguageController {
 		stage.getDrawer().getTrackCard().getHeader().textProperty().bind(createBinding("drawer.card.track.header"));
 		stage.getDrawer().getTrackCard().getPerlinTrackLabel().textProperty().bind(createBinding("drawer.card.track.perlin"));
 		stage.getDrawer().getTrackCard().getConvexHullLabel().textProperty().bind(createBinding("drawer.card.track.convexHull"));
+        stage.getDrawer().getTrackCard().getPartTrackLabel().textProperty().bind(createBinding("drawer.card.track.partTrack"));
 
 		stage.getDrawer().getGeneticAlgorithmCard().getHeader().textProperty()
 				.bind(createBinding("drawer.card.geneticAlgorithm.header"));
