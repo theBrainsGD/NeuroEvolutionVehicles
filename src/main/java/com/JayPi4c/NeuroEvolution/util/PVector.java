@@ -1,5 +1,3 @@
-package com.JayPi4c.utils;
-
 /* -*- mode: java; c-basic-offset: 2; indent-tabs-mode: nil -*- */
 
 /*
@@ -24,7 +22,11 @@ package com.JayPi4c.utils;
   Boston, MA  02111-1307  USA
  */
 
+package com.JayPi4c.NeuroEvolution.util;
+
 import java.io.Serializable;
+
+import lombok.EqualsAndHashCode;
 
 /**
  * ( begin auto-generated from PVector.xml )
@@ -66,9 +68,10 @@ import java.io.Serializable;
  *
  * @webref math
  */
+@EqualsAndHashCode
 public class PVector implements Serializable {
 
-	private static final long serialVersionUID = 7481252018308823829L;
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * ( begin auto-generated from PVector_x.xml )
@@ -200,6 +203,72 @@ public class PVector implements Serializable {
 			z = 0;
 		}
 		return this;
+	}
+
+	/**
+	 * ( begin auto-generated from PVector_random2D.xml )
+	 *
+	 * Make a new 2D unit vector with a random direction. If you pass in "this" as
+	 * an argument, it will use the PApplet's random number generator. You can also
+	 * pass in a target PVector to fill.
+	 *
+	 * @webref pvector:method
+	 * @usage web_application
+	 * @return the random PVector
+	 * @brief Make a new 2D unit vector with a random direction.
+	 * @see PVector#random3D()
+	 */
+	static public PVector random2D() {
+		return random2D(null);
+	}
+
+	/**
+	 * Set a 2D vector to a random unit vector with a random direction
+	 * 
+	 * @param target the target vector (if null, a new vector will be created)
+	 * @return the random PVector
+	 */
+	static public PVector random2D(PVector target) {
+		return fromAngle((Math.random() * Math.PI * 2), target);
+	}
+
+	/**
+	 * ( begin auto-generated from PVector_random3D.xml )
+	 *
+	 * Make a new 3D unit vector with a random direction. If you pass in "this" as
+	 * an argument, it will use the PApplet's random number generator. You can also
+	 * pass in a target PVector to fill.
+	 *
+	 * @webref pvector:method
+	 * @usage web_application
+	 * @return the random PVector
+	 * @brief Make a new 3D unit vector with a random direction.
+	 * @see PVector#random2D()
+	 */
+	static public PVector random3D() {
+		return random3D(null);
+	}
+
+	/**
+	 * Set a 3D vector to a random unit vector with a random direction
+	 * 
+	 * @param target the target vector (if null, a new vector will be created)
+	 * @return the random PVector
+	 */
+	static public PVector random3D(PVector target) {
+		double angle;
+		double vz;
+		angle = (Math.random() * Math.PI * 2);
+		vz = (Math.random() * 2 - 1);
+		double vx = (Math.sqrt(1 - vz * vz) * Math.cos(angle));
+		double vy = (Math.sqrt(1 - vz * vz) * Math.sin(angle));
+		if (target == null) {
+			target = new PVector(vx, vy, vz);
+			// target.normalize(); // Should be unnecessary
+		} else {
+			target.set(vx, vy, vz);
+		}
+		return target;
 	}
 
 	/**
@@ -556,7 +625,7 @@ public class PVector implements Serializable {
 		double dx = v1.x - v2.x;
 		double dy = v1.y - v2.y;
 		double dz = v1.z - v2.z;
-		return Math.sqrt(dx * dx + dy * dy + dz * dz);
+		return (double) Math.sqrt(dx * dx + dy * dy + dz * dz);
 	}
 
 	/**
@@ -746,13 +815,74 @@ public class PVector implements Serializable {
 	 * @brief Calculate the angle of rotation for this vector
 	 */
 	public double heading() {
-		double angle = Math.atan2(y, x);
+		double angle = (double) Math.atan2(y, x);
 		return angle;
 	}
 
 	@Deprecated
 	public double heading2D() {
 		return heading();
+	}
+
+	/**
+	 * ( begin auto-generated from PVector_rotate.xml )
+	 *
+	 * Rotate the vector by an angle (only 2D vectors), magnitude remains the same
+	 *
+	 * ( end auto-generated )
+	 *
+	 * @webref pvector:method
+	 * @usage web_application
+	 * @brief Rotate the vector by an angle (2D only)
+	 * @param theta the angle of rotation
+	 */
+	public PVector rotate(double theta) {
+		double temp = x;
+		// Might need to check for rounding errors like with angleBetween function?
+		x = x * (double) Math.cos(theta) - y * (double) Math.sin(theta);
+		y = temp * (double) Math.sin(theta) + y * (double) Math.cos(theta);
+		return this;
+	}
+
+	/**
+	 * ( begin auto-generated from PVector_angleBetween.xml )
+	 *
+	 * Calculates and returns the angle (in radians) between two vectors.
+	 *
+	 * ( end auto-generated )
+	 *
+	 * @webref pvector:method
+	 * @usage web_application
+	 * @param v1 the x, y, and z components of a PVector
+	 * @param v2 the x, y, and z components of a PVector
+	 * @brief Calculate and return the angle between two vectors
+	 */
+	static public double angleBetween(PVector v1, PVector v2) {
+
+		// We get NaN if we pass in a zero vector which can cause problems
+		// Zero seems like a reasonable angle between a (0,0,0) vector and something
+		// else
+		if (v1.x == 0 && v1.y == 0 && v1.z == 0)
+			return 0.0f;
+		if (v2.x == 0 && v2.y == 0 && v2.z == 0)
+			return 0.0f;
+
+		double dot = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+		double v1mag = Math.sqrt(v1.x * v1.x + v1.y * v1.y + v1.z * v1.z);
+		double v2mag = Math.sqrt(v2.x * v2.x + v2.y * v2.y + v2.z * v2.z);
+		// This should be a number between -1 and 1, since it's "normalized"
+		double amt = dot / (v1mag * v2mag);
+		// But if it's not due to rounding error, then we need to fix it
+		// http://code.google.com/p/processing/issues/detail?id=340
+		// Otherwise if outside the range, acos() will return NaN
+		// http://www.cppreference.com/wiki/c/math/acos
+		if (amt <= -1) {
+			return (double) Math.PI;
+		} else if (amt >= 1) {
+			// http://code.google.com/p/processing/issues/detail?id=435
+			return 0;
+		}
+		return (double) Math.acos(amt);
 	}
 
 	@Override
@@ -781,15 +911,6 @@ public class PVector implements Serializable {
 		array[1] = y;
 		array[2] = z;
 		return array;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof PVector)) {
-			return false;
-		}
-		final PVector p = (PVector) obj;
-		return x == p.x && y == p.y && z == p.z;
 	}
 
 }
