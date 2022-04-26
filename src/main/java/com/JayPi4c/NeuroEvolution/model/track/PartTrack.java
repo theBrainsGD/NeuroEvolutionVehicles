@@ -41,7 +41,6 @@ public class PartTrack implements Track {
     private PART[][] track;
 
     private final int panelWidth;
-    private final int panelHeight;
 
     @Getter
     private PVector start;
@@ -55,13 +54,11 @@ public class PartTrack implements Track {
 
     protected PartTrack(int panelWidth, int panelHeight) {
         this.panelWidth = panelWidth;
-        this.panelHeight = panelHeight;
         random = new Random();
     }
 
     protected PartTrack(int panelWidth, int panelHeight, int seed) {
         this.panelWidth = panelWidth;
-        this.panelHeight = panelHeight;
         random = new Random(seed);
     }
 
