@@ -19,8 +19,6 @@ public class PerlinTrack implements Track {
 
     @Getter
     private PVector start;
-    @Getter
-    private PVector end;
 
     @Getter
     private List<Boundary> walls;
@@ -59,7 +57,6 @@ public class PerlinTrack implements Track {
         walls.addAll(Boundary.createBoundaries(ptsOuter, true));
 
         start = checkpoints.get(0).midPoint();
-        end = checkpoints.get(checkpoints.size() - 1).midPoint();
     }
 
     @Override

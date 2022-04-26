@@ -18,8 +18,6 @@ public class ConvexHullTrack implements Track {
 
     @Getter
     private PVector start;
-    @Getter
-    private PVector end;
 
     @Getter
     private List<Boundary> walls;
@@ -112,7 +110,6 @@ public class ConvexHullTrack implements Track {
                 checkpoints.add(new Boundary(inner.x, inner.y, outer.x, outer.y));
         }
         start = checkpoints.get(0).midPoint();
-        end = checkpoints.get(checkpoints.size() - 1).midPoint();
 
         walls = new ArrayList<>();
         walls.addAll(Boundary.createBoundaries(ptsInner, true));
