@@ -1,8 +1,10 @@
 package com.JayPi4c.NeuroEvolution.model.track;
 
-import com.JayPi4c.NeuroEvolution.model.Boundary;
+import com.JayPi4c.NeuroEvolution.plugins.track.Track;
+import com.JayPi4c.NeuroEvolution.plugins.util.Boundary;
+import com.JayPi4c.NeuroEvolution.plugins.util.PVector;
 import com.JayPi4c.NeuroEvolution.util.OpenSimplexNoise;
-import com.JayPi4c.NeuroEvolution.util.PVector;
+
 import lombok.Getter;
 
 import java.util.ArrayList;

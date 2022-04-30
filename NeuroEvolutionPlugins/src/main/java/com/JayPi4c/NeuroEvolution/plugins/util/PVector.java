@@ -22,11 +22,9 @@
   Boston, MA  02111-1307  USA
  */
 
-package com.JayPi4c.NeuroEvolution.util;
+package com.JayPi4c.NeuroEvolution.plugins.util;
 
 import java.io.Serializable;
-
-import lombok.EqualsAndHashCode;
 
 /**
  * ( begin auto-generated from PVector.xml )
@@ -68,7 +66,6 @@ import lombok.EqualsAndHashCode;
  *
  * @webref math
  */
-@EqualsAndHashCode
 public class PVector implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -913,4 +910,35 @@ public class PVector implements Serializable {
 		return array;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(x);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(y);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(z);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PVector other = (PVector) obj;
+		if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
+			return false;
+		if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
+			return false;
+		if (Double.doubleToLongBits(z) != Double.doubleToLongBits(other.z))
+			return false;
+		return true;
+	}
 }

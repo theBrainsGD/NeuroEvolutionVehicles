@@ -1,6 +1,7 @@
 package com.JayPi4c.NeuroEvolution.model;
 
-import com.JayPi4c.NeuroEvolution.util.PVector;
+import com.JayPi4c.NeuroEvolution.plugins.util.Boundary;
+import com.JayPi4c.NeuroEvolution.plugins.util.PVector;
 
 public class Ray {
 	private PVector pos;

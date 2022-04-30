@@ -1,5 +1,7 @@
 package com.JayPi4c.NeuroEvolution.model.track;
 
+import com.JayPi4c.NeuroEvolution.plugins.track.Track;
+
 public class TrackFactory {
 
     public static final String PERLIN_NOISE = "perlin_noise";

@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.UUID;
 
 import com.JayPi4c.GenericNeuralNetwork;
-import com.JayPi4c.NeuroEvolution.util.PVector;
+import com.JayPi4c.NeuroEvolution.plugins.util.Boundary;
+import com.JayPi4c.NeuroEvolution.plugins.util.PVector;
 
 import lombok.Getter;
 import lombok.Setter;

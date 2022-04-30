@@ -1,13 +1,10 @@
-package com.JayPi4c.NeuroEvolution.model;
-
-import com.JayPi4c.NeuroEvolution.util.PVector;
-import lombok.Getter;
+package com.JayPi4c.NeuroEvolution.plugins.util;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 public class Boundary {
+
 	private PVector a;
 	private PVector b;
 
@@ -35,4 +32,13 @@ public class Boundary {
         }
         return boundaries;
     }
+
+    public PVector getA(){
+        return a;
+    }
+
+    public PVector getB(){
+        return b;
+    }
+
 }

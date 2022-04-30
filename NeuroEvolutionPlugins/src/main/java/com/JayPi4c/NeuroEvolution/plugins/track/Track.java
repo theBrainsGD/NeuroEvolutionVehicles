@@ -1,9 +1,9 @@
-package com.JayPi4c.NeuroEvolution.model.track;
-
-import com.JayPi4c.NeuroEvolution.model.Boundary;
-import com.JayPi4c.NeuroEvolution.util.PVector;
+package com.JayPi4c.NeuroEvolution.plugins.track;
 
 import java.util.List;
+
+import com.JayPi4c.NeuroEvolution.plugins.util.Boundary;
+import com.JayPi4c.NeuroEvolution.plugins.util.PVector;
 
 public interface Track {
 
