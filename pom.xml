@@ -122,7 +122,7 @@
 		<dependency>
 			<groupId>com.jfoenix</groupId>
 			<artifactId>jfoenix</artifactId>
-			<version>9.0.10</version>
+			<version>9.0.3</version> <!-- version 9.0.4 - 9.0.10 break the drawer system -->
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
