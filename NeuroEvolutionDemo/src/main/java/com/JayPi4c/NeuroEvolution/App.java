@@ -1,9 +1,12 @@
 package com.JayPi4c.NeuroEvolution;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import com.JayPi4c.NeuroEvolution.plugins.track.Track;
 import com.JayPi4c.NeuroEvolution.util.I18nUtils;
+import com.JayPi4c.NeuroEvolution.util.PluginLoader;
 import com.JayPi4c.NeuroEvolution.view.MainStage;
 
 import javafx.application.Application;
@@ -21,6 +24,10 @@ public class App extends Application {
 	public void init() throws Exception {
 		log.debug("Initializing Application");
 		I18nUtils.setBundle(ResourceBundle.getBundle("lang.messages", Locale.GERMANY));
+
+		PluginLoader.init();
+		List<Track> tracks = PluginLoader.loadPlugins(Track.class);
+		log.debug("Loaded {} tracks", tracks.size());
 	}
 
 	@Override
