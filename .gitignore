@@ -5,3 +5,4 @@ bin/
 NeuralNetwork.nn
 target/
 logs/
+.vscode

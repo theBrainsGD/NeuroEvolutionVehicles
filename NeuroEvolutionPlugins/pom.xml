@@ -7,9 +7,9 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>NeuroEvolutionPlugins</artifactId>
+  
   <build>
     <plugins>
-
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.0</version>
@@ -18,7 +18,6 @@
           <target>17</target>
         </configuration>
       </plugin>
-
       <plugin>        <!-- Create sources.jar -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
