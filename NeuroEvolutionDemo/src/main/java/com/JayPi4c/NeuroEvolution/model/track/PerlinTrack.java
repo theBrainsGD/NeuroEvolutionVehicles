@@ -29,6 +29,10 @@ public class PerlinTrack implements Track {
     @Getter
     private List<Boundary> checkpoints;
 
+    public String getTrackName(){
+        return "PerlinTrack";
+    }
+
     protected PerlinTrack(int panelWidth, int panelHeight) {
         this.panelWidth = panelWidth;
         this.panelHeight = panelHeight;

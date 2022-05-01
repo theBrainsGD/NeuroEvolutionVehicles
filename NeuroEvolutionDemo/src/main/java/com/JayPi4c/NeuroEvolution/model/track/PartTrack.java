@@ -55,6 +55,10 @@ public class PartTrack implements Track {
     @Getter
     private List<Boundary> checkpoints;
 
+    public String getTrackName(){
+        return "PartTrack";
+    }
+
     protected PartTrack(int panelWidth, int panelHeight) {
         this.panelWidth = panelWidth;
         this.panelHeight = panelHeight;

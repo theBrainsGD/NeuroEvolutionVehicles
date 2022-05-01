@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import com.JayPi4c.NeuroEvolution.model.track.TrackFactory;
 import com.JayPi4c.NeuroEvolution.plugins.track.Track;
 import com.JayPi4c.NeuroEvolution.util.I18nUtils;
 import com.JayPi4c.NeuroEvolution.util.PluginLoader;
@@ -27,6 +28,7 @@ public class App extends Application {
 
 		PluginLoader.init();
 		List<Track> tracks = PluginLoader.loadPlugins(Track.class);
+		TrackFactory.setCustomTracks(tracks);
 		log.debug("Loaded {} tracks", tracks.size());
 	}
 

@@ -27,4 +27,6 @@ public interface Track {
      * @return
      */
     public PVector getStartVelocity();
+
+    String getTrackName();
 }

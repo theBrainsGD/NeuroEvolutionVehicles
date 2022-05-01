@@ -27,6 +27,10 @@ public class ConvexHullTrack implements Track {
     @Getter
     private List<Boundary> checkpoints;
 
+    public String getTrackName(){
+        return "ConvexHullTrack";
+    }
+
     /**
      * Constructor for ConvexHullTrack.
      * <br>
