@@ -1,7 +1,8 @@
 package com.JayPi4c.NeuroEvolution.model.track;
 
-import com.JayPi4c.NeuroEvolution.model.Boundary;
-import com.JayPi4c.NeuroEvolution.util.PVector;
+import com.JayPi4c.NeuroEvolution.plugins.track.Track;
+import com.JayPi4c.NeuroEvolution.plugins.util.Boundary;
+import com.JayPi4c.NeuroEvolution.plugins.util.PVector;
 import com.badlogic.gdx.math.CatmullRomSpline;
 import com.badlogic.gdx.math.Vector2;
 import lombok.Getter;
@@ -23,6 +24,10 @@ public class ConvexHullTrack implements Track {
     private List<Boundary> walls;
     @Getter
     private List<Boundary> checkpoints;
+
+    public String getTrackName(){
+        return "ConvexHullTrack";
+    }
 
     /**
      * Constructor for ConvexHullTrack.

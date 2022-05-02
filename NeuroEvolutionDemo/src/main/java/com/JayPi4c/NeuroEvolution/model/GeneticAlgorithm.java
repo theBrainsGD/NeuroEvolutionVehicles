@@ -3,10 +3,10 @@ package com.JayPi4c.NeuroEvolution.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.JayPi4c.NeuroEvolution.model.track.Track;
 import com.JayPi4c.NeuroEvolution.model.track.TrackFactory;
+import com.JayPi4c.NeuroEvolution.plugins.track.Track;
+import com.JayPi4c.NeuroEvolution.plugins.util.PVector;
 import com.JayPi4c.NeuroEvolution.util.Observable;
-import com.JayPi4c.NeuroEvolution.util.PVector;
 
 import lombok.Getter;
 import lombok.Synchronized;

@@ -1,7 +1,9 @@
 package com.JayPi4c.NeuroEvolution.model.track;
 
-import com.JayPi4c.NeuroEvolution.model.Boundary;
-import com.JayPi4c.NeuroEvolution.util.PVector;
+import com.JayPi4c.NeuroEvolution.plugins.track.Track;
+import com.JayPi4c.NeuroEvolution.plugins.util.Boundary;
+import com.JayPi4c.NeuroEvolution.plugins.util.PVector;
+
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -49,6 +51,10 @@ public class PartTrack implements Track {
     private List<Boundary> walls;
     @Getter
     private List<Boundary> checkpoints;
+
+    public String getTrackName(){
+        return "PartTrack";
+    }
 
     protected PartTrack(int panelWidth, int panelHeight) {
         this.panelWidth = panelWidth;

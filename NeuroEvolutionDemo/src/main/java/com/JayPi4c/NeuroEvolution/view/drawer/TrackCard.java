@@ -1,5 +1,10 @@
 package com.JayPi4c.NeuroEvolution.view.drawer;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.JayPi4c.NeuroEvolution.model.track.TrackFactory;
+import com.JayPi4c.NeuroEvolution.plugins.track.Track;
 import com.jfoenix.controls.JFXToggleNode;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -17,6 +22,8 @@ public class TrackCard extends Pane {
     private JFXToggleNode partTrackToggle;
     private Label partTrackLabel;
 
+    private List<JFXToggleNode> customTrackToggles;
+
     public TrackCard() {
         header = new Label();
 
@@ -32,6 +39,17 @@ public class TrackCard extends Pane {
 
         var vBox = new VBox(header);
         vBox.getChildren().addAll(perlinTrackToggle, convexHullToggle, partTrackToggle);
+
+        customTrackToggles = new ArrayList<>();
+        for(Track t : TrackFactory.getCustomTracks()) {
+            JFXToggleNode toggle = new JFXToggleNode();
+            Label label = new Label(t.getTrackName());
+            toggle.setGraphic(label);
+            customTrackToggles.add(toggle);
+        }
+        vBox.getChildren().addAll(customTrackToggles);
+
+
         getChildren().add(vBox);
     }
 }

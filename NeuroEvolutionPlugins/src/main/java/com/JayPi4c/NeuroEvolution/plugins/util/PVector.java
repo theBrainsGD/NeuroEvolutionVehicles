@@ -22,11 +22,9 @@
   Boston, MA  02111-1307  USA
  */
 
-package com.JayPi4c.NeuroEvolution.util;
+package com.JayPi4c.NeuroEvolution.plugins.util;
 
 import java.io.Serializable;
-
-import lombok.EqualsAndHashCode;
 
 /**
  * ( begin auto-generated from PVector.xml )
@@ -66,9 +64,7 @@ import lombok.EqualsAndHashCode;
  * Initially based on the Vector3D class by
  * <a href="http://www.shiffman.net">Dan Shiffman</a>.
  *
- * @webref math
  */
-@EqualsAndHashCode
 public class PVector implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -81,9 +77,6 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:field
-	 * @usage web_application
-	 * @brief The x component of the vector
 	 */
 	public double x;
 
@@ -95,9 +88,6 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:field
-	 * @usage web_application
-	 * @brief The y component of the vector
 	 */
 	public double y;
 
@@ -108,10 +98,6 @@ public class PVector implements Serializable {
 	 * and set the value (see above example.)
 	 *
 	 * ( end auto-generated )
-	 *
-	 * @webref pvector:field
-	 * @usage web_application
-	 * @brief The z component of the vector
 	 */
 	public double z;
 
@@ -153,11 +139,9 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
 	 * @param x the x component of the vector
 	 * @param y the y component of the vector
 	 * @param z the z component of the vector
-	 * @brief Set the components of the vector
 	 */
 	public PVector set(double x, double y, double z) {
 		this.x = x;
@@ -212,10 +196,7 @@ public class PVector implements Serializable {
 	 * an argument, it will use the PApplet's random number generator. You can also
 	 * pass in a target PVector to fill.
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
 	 * @return the random PVector
-	 * @brief Make a new 2D unit vector with a random direction.
 	 * @see PVector#random3D()
 	 */
 	static public PVector random2D() {
@@ -239,10 +220,7 @@ public class PVector implements Serializable {
 	 * an argument, it will use the PApplet's random number generator. You can also
 	 * pass in a target PVector to fill.
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
 	 * @return the random PVector
-	 * @brief Make a new 3D unit vector with a random direction.
 	 * @see PVector#random2D()
 	 */
 	static public PVector random3D() {
@@ -278,9 +256,6 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
-	 * @brief Make a new 2D unit vector from an angle
 	 * @param angle the angle in radians
 	 * @return the new unit PVector
 	 */
@@ -310,9 +285,6 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
-	 * @brief Get a copy of the vector
 	 */
 	public PVector copy() {
 		return new PVector(x, y, z);
@@ -348,9 +320,6 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
-	 * @brief Calculate the magnitude of the vector
 	 * @return magnitude (length) of the vector
 	 * @see PVector#magSq()
 	 */
@@ -367,9 +336,6 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
-	 * @brief Calculate the magnitude of the vector, squared
 	 * @return squared magnitude of the vector
 	 * @see PVector#mag()
 	 */
@@ -388,11 +354,7 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
 	 * @param v the vector to be added
-	 * @brief Adds x, y, and z components to a vector, one vector to another, or two
-	 *        independent vectors
 	 */
 	public PVector add(PVector v) {
 		x += v.x;
@@ -456,11 +418,7 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
 	 * @param v any variable of type PVector
-	 * @brief Subtract x, y, and z components from a vector, one vector from
-	 *        another, or two independent vectors
 	 */
 	public PVector sub(PVector v) {
 		x -= v.x;
@@ -520,9 +478,6 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
-	 * @brief Multiply a vector by a scalar
 	 * @param n the number to multiply with the vector
 	 */
 	public PVector mult(double n) {
@@ -560,9 +515,6 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
-	 * @brief Divide a vector by a scalar
 	 * @param n the number by which to divide the vector
 	 */
 	public PVector div(double n) {
@@ -604,10 +556,7 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
 	 * @param v the x, y, and z coordinates of a PVector
-	 * @brief Calculate the distance between two points
 	 */
 	public double dist(PVector v) {
 		double dx = x - v.x;
@@ -635,11 +584,8 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
 	 * @param v any variable of type PVector
 	 * @return the dot product
-	 * @brief Calculate the dot product of two vectors
 	 */
 	public double dot(PVector v) {
 		return x * v.x + y * v.y + z * v.z;
@@ -670,9 +616,7 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
 	 * @param v the vector to calculate the cross product
-	 * @brief Calculate and return the cross product
 	 */
 	public PVector cross(PVector v) {
 		return cross(v, null);
@@ -720,9 +664,6 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
-	 * @brief Normalize the vector to a length of 1
 	 */
 	public PVector normalize() {
 		double m = mag();
@@ -757,10 +698,7 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
 	 * @param max the maximum magnitude for the vector
-	 * @brief Limit the magnitude of the vector
 	 */
 	public PVector limit(double max) {
 		if (magSq() > max * max) {
@@ -778,10 +716,7 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
 	 * @param len the new length for this vector
-	 * @brief Set the magnitude of the vector
 	 */
 	public PVector setMag(double len) {
 		normalize();
@@ -809,10 +744,7 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
 	 * @return the angle of rotation
-	 * @brief Calculate the angle of rotation for this vector
 	 */
 	public double heading() {
 		double angle = (double) Math.atan2(y, x);
@@ -831,9 +763,6 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
-	 * @brief Rotate the vector by an angle (2D only)
 	 * @param theta the angle of rotation
 	 */
 	public PVector rotate(double theta) {
@@ -851,11 +780,8 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
-	 * @usage web_application
 	 * @param v1 the x, y, and z components of a PVector
 	 * @param v2 the x, y, and z components of a PVector
-	 * @brief Calculate and return the angle between two vectors
 	 */
 	static public double angleBetween(PVector v1, PVector v2) {
 
@@ -899,9 +825,6 @@ public class PVector implements Serializable {
 	 *
 	 * ( end auto-generated )
 	 *
-	 * @webref pvector:method
-	 * @usage: web_application
-	 * @brief Return a representation of the vector as a double array
 	 */
 	public double[] array() {
 		if (array == null) {
@@ -913,4 +836,35 @@ public class PVector implements Serializable {
 		return array;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(x);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(y);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(z);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PVector other = (PVector) obj;
+		if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
+			return false;
+		if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
+			return false;
+		if (Double.doubleToLongBits(z) != Double.doubleToLongBits(other.z))
+			return false;
+		return true;
+	}
 }
