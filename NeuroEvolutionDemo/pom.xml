@@ -7,7 +7,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>NeuroEvolutionDemo</artifactId>
- 
+
 	<properties>
 		<javafx.version>19-ea+3</javafx.version>
 		<junit.version>5.8.2</junit.version>

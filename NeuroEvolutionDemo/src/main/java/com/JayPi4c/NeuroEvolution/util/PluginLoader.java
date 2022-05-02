@@ -32,14 +32,16 @@ public class PluginLoader {
     }
 
     /**
-     * Because of the call to {@link #classImplementsInterface} this method will only work for interfaces
-     * @param <T> The interface type of the plugin
-     * @param clazz 
+     * Because of the call to {@link #classImplementsInterface} this method will
+     * only work for interfaces
+     * 
+     * @param <T>   The interface type of the plugin
+     * @param clazz
      * @return
      */
     public static <T> List<T> loadPlugins(Class<T> clazz) {
         try {
-            // Get all the files in mod folder
+            // Get all the files in plugins folder
             File folder = getPluginFolder();
             File[] plugins = folder.listFiles();
 
@@ -76,7 +78,7 @@ public class PluginLoader {
 
                     // Load the class
                     Class<?> c = cl.loadClass(className);
-                    
+
                     // if class is instance of IPlayer
                     if (classImplementsInterface(c, clazz)) {
                         // Create an instance of the class
