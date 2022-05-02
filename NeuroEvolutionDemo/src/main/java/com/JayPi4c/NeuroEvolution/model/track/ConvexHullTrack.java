@@ -13,9 +13,7 @@ import java.util.List;
 public class ConvexHullTrack implements Track {
 
     private int checkpointDivider = 90;
-    private int halfTrackWidth = 30;
-    private int panelWidth;
-    private int panelHeight;
+    private double halfTrackWidth = 3 / 40d;
 
     @Getter
     private PVector start;
@@ -25,28 +23,14 @@ public class ConvexHullTrack implements Track {
     @Getter
     private List<Boundary> checkpoints;
 
-    public String getTrackName(){
+    public String getTrackName() {
         return "ConvexHullTrack";
     }
 
     /**
-     * Constructor for ConvexHullTrack.
-     * <br>
-     * The buildTrack() method will construct the track in the way which is
-     * discribed on this website:
-     * <a href=
+     * @implNote <a href=
      * "https://www.gamedeveloper.com/programming/generating-procedural-racetracks">gamedeveloper.com</a>
-     * 
-     * @param panelWidth
-     *                    The width of the panel
-     * @param panelHeight
-     *                    The height of the panel
      */
-    protected ConvexHullTrack(int panelWidth, int panelHeight) {
-        this.panelWidth = panelWidth;
-        this.panelHeight = panelHeight;
-    }
-
     @Override
     public void buildTrack() {
         int numRandomPoints = 50;
@@ -55,8 +39,8 @@ public class ConvexHullTrack implements Track {
         checkpoints = new ArrayList<>();
         double buffer = halfTrackWidth * 1.5;
         for (int i = 0; i < numRandomPoints; i++) {
-            double x = buffer + Math.random() * (panelWidth - buffer * 2);
-            double y = buffer + Math.random() * (panelHeight - buffer * 2);
+            double x = buffer + Math.random() * (1 - buffer * 2);
+            double y = buffer + Math.random() * (1 - buffer * 2);
             pts.add(new PVector(x, y));
         }
         ArrayList<PVector> hull = getConvexHull(pts);
@@ -67,10 +51,10 @@ public class ConvexHullTrack implements Track {
         }
 
         // adding circuit details
-        ArrayList<PVector> rSet = new ArrayList<>();
+       ArrayList<PVector> rSet = new ArrayList<>();
         PVector disp = new PVector();
-        double difficulty = 1f / 20f;
-        double maxDisp = 20f;
+        double difficulty = 1f / 20f; // the closer to the, the harder the track
+        double maxDisp = 20/400d;
         for (int i = 0; i < hull.size(); i++) {
             double dispLen = Math.pow(Math.random(), difficulty) * maxDisp;
             disp.set(0, 1);
@@ -100,7 +84,7 @@ public class ConvexHullTrack implements Track {
 
         ArrayList<PVector> ptsInner = new ArrayList<>();
         ArrayList<PVector> ptsOuter = new ArrayList<>();
-        PVector center = new PVector(panelWidth * 0.5, panelHeight * 0.5);
+        PVector center = new PVector(0.5, 0.5);
         for (int i = 0; i < hull.size(); i++) {
             PVector p = hull.get(i);
             PVector v = PVector.sub(p, center);
@@ -159,7 +143,7 @@ public class ConvexHullTrack implements Track {
         for (PVector p : dataSet) {
             data[dataSet.indexOf(p)] = new Vector2((float) p.x, (float) p.y);
         }
-        float step = 0.1f;
+        float step = 1/4000f;
         ArrayList<PVector> smoothed = new ArrayList<>();
         for (float t = 0; t <= 1.0f;) {
             Vector2 p = new Vector2();
@@ -169,7 +153,7 @@ public class ConvexHullTrack implements Track {
             deriv = CatmullRomSpline.derivative(deriv, t, data, true, new Vector2());
             float len = deriv.len();
             deriv.scl(1f / len);
-            deriv.scl(1);
+            deriv.scl(1/400f);
             deriv.set(-deriv.y, deriv.x);
             Vector2 v1 = new Vector2();
             v1.set(p).add(deriv);
@@ -183,7 +167,7 @@ public class ConvexHullTrack implements Track {
     }
 
     private void pushApart(ArrayList<PVector> points) {
-        double dst = 15;
+        double dst = 15/400d;
         double dst2 = dst * dst;
         for (int i = 0; i < points.size(); i++) {
             for (int j = i + 1; j < points.size(); j++) {

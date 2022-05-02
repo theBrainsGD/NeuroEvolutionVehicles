@@ -34,13 +34,13 @@ public class MainPanel extends Canvas implements Observer {
 		gc.setStroke(Color.BLACK);
 		Track track = ga.getTrack();
 		for (Boundary b : track.getWalls()) {
-			gc.strokeLine(b.getA().x, b.getA().y, b.getB().x, b.getB().y);
+			gc.strokeLine(mapWidth(b.getA().x), mapHeight(b.getA().y), mapWidth(b.getB().x), mapHeight(b.getB().y));
 		}
-		gc.strokeOval(track.getStart().x, track.getStart().y, 5, 5);
+		gc.strokeOval(mapWidth(track.getStart().x), mapHeight(track.getStart().y), 5, 5);
 		// draw the checkpoints
 		gc.setStroke(Color.RED);
 		for (Boundary b : track.getCheckpoints()) {
-			gc.strokeLine(b.getA().x, b.getA().y, b.getB().x, b.getB().y);
+			gc.strokeLine(mapWidth(b.getA().x), mapHeight(b.getA().y), mapWidth(b.getB().x), mapHeight(b.getB().y));
 		}
 
 		// draw the vehicles
@@ -60,9 +60,9 @@ public class MainPanel extends Canvas implements Observer {
 		if (v == null)
 			return;
 		gc.save();
-		gc.translate(v.getPos().x, v.getPos().y);
+		gc.translate(mapWidth(v.getPos().x), mapHeight(v.getPos().y));
 		gc.rotate(Math.toDegrees(v.getVel().heading()));
-		gc.strokeRect(-5, -2, 10, 5);
+		gc.strokeRect(-5, -2, 10, 5); // TODO get relative size from vehicle
 		gc.restore();
 	}
 
@@ -73,6 +73,14 @@ public class MainPanel extends Canvas implements Observer {
 
 	private void update() {
 		paint();
+	}
+
+	private int mapWidth(double x) {
+		return (int) (x * getWidth());
+	}
+
+	private int mapHeight(double y) {
+		return (int) (y * getHeight());
 	}
 
 }

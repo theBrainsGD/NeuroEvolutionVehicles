@@ -2,6 +2,7 @@ package com.JayPi4c.NeuroEvolution.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import com.JayPi4c.GenericNeuralNetwork;
@@ -17,10 +18,12 @@ public class Vehicle {
 	@Setter
 	private UUID id;
 
-	private double maxSpeed = 5;
-	private double maxForce = 0.2;
+	private double maxSpeed = 5 / 400d;
+	private double maxForce = 0.2 / 400d;
 
-	private int sight = 100;
+	private double crashDistance = 5 / 400d;
+
+	private double sight = 1 / 4d;
 	private int lifespan = 35;
 	private int lifeCounter;
 
@@ -42,15 +45,19 @@ public class Vehicle {
 
 	private GenericNeuralNetwork brain;
 
+	private Random random;
+
 	/**
 	 * 
 	 * @param start
-	 * @param startVel represents the initial facing. Should be perpendicular to the first checkpoint
+	 * @param startVel     represents the initial facing. Should be perpendicular to
+	 *                     the first checkpoint
 	 * @param nn
 	 * @param mutationRate
 	 */
 	public Vehicle(PVector start, PVector startVel, GenericNeuralNetwork nn, double mutationRate) {
 		id = UUID.randomUUID();
+		random = new Random();
 		checkPointFitness = 0;
 		lapFitness = 0;
 		lapCount = 0;
@@ -59,11 +66,14 @@ public class Vehicle {
 		checkpointIndex = 0;
 		pos = start.copy();
 
+		double d2 = 1 / 400d;
+		if (startVel == null) {
+			double x = random.nextDouble(-d2, d2);
+			double y = random.nextDouble(-d2, d2);
+			vel = new PVector(x, y);
+		} else
+			vel = startVel.copy().normalize().mult(1 / 400d);
 
-		if (startVel == null)
-			vel = new PVector(Math.random() * 2 - 1, Math.random() * 2 - 1);
-		else
-			vel = startVel.copy();
 		this.startVel = vel.copy();
 		acc = new PVector();
 		rays = new ArrayList<>();
@@ -118,7 +128,7 @@ public class Vehicle {
 						rec = d;
 				}
 			}
-			if (rec < 5) { // vehicle crashed in the wall
+			if (rec < crashDistance) { // vehicle crashed in the wall
 				dead = true;
 				return;
 			}
@@ -155,7 +165,7 @@ public class Vehicle {
 	public void check(List<Boundary> checkpoints) {
 		Boundary goal = checkpoints.get(checkpointIndex);
 		double d = pldistance(goal.getA(), goal.getB(), pos.x, pos.y);
-		if (d < 5) {
+		if (d < crashDistance) {
 			checkpointIndex = ++checkpointIndex % checkpoints.size();
 			if (checkpointIndex == 0) {
 				lapCount++;

@@ -12,26 +12,22 @@ public class TrackCardController {
         int panelHeight = (int) mainStage.getMainPanel().getHeight();
         var toggleGroup = new ToggleGroup();
         mainStage.getDrawer().getTrackCard().getPerlinTrackToggle().setOnAction(
-                event -> mainStage.getGeneticAlgorithm().setTrack(TrackFactory.createTrack(TrackFactory.PERLIN_NOISE,
-                        panelWidth, panelHeight)));
+                event -> mainStage.getGeneticAlgorithm().setTrack(TrackFactory.createTrack(TrackFactory.PERLIN_NOISE)));
         mainStage.getDrawer().getTrackCard().getPerlinTrackToggle().setToggleGroup(toggleGroup);
 
         mainStage.getDrawer().getTrackCard().getConvexHullToggle().setOnAction(
-                event -> mainStage.getGeneticAlgorithm().setTrack(TrackFactory.createTrack(TrackFactory.CONVEX_HULL,
-                        panelWidth, panelHeight)));
+                event -> mainStage.getGeneticAlgorithm().setTrack(TrackFactory.createTrack(TrackFactory.CONVEX_HULL)));
         mainStage.getDrawer().getTrackCard().getConvexHullToggle().setToggleGroup(toggleGroup);
         mainStage.getDrawer().getTrackCard().getConvexHullToggle().setSelected(true);
 
         mainStage.getDrawer().getTrackCard().getPartTrackToggle().setOnAction(
-                event -> mainStage.getGeneticAlgorithm().setTrack(TrackFactory.createTrack(TrackFactory.PART_TRACK,
-                        panelWidth, panelHeight)));
+                event -> mainStage.getGeneticAlgorithm().setTrack(TrackFactory.createTrack(TrackFactory.PART_TRACK)));
         mainStage.getDrawer().getTrackCard().getPartTrackToggle().setToggleGroup(toggleGroup);
 
         mainStage.getDrawer().getTrackCard().getCustomTrackToggles().forEach(toggle -> {
             toggle.setOnAction(event -> {
                     String text = ((Label)toggle.getGraphic()).getText();
-                mainStage.getGeneticAlgorithm().setTrack(TrackFactory.createTrack(text, panelWidth,
-                        panelHeight));
+                mainStage.getGeneticAlgorithm().setTrack(TrackFactory.createTrack(text));
             });
             toggle.setToggleGroup(toggleGroup);
         });

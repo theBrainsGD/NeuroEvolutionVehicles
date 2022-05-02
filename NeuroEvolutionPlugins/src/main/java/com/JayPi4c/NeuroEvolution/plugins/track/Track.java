@@ -59,7 +59,9 @@ public interface Track {
      * Returns a PVector which points into the direction the vehicles should drive.
      * This normally is the direction orthogonally to the start/finish line pointing
      * to the first checkpoint.
-     *
+     * <br>
+     * The returned vector must be normalized.
+     * 
      * @return starting direction on the given startpoint.
      * @see PVector
      */

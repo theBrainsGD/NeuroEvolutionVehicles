@@ -16,16 +16,17 @@ public class TrackFactory {
     @Setter
     private static List<Track> customTracks;
 
-    public static Track createTrack(String type, int panelWidth, int panelHeight) {
+    public static Track createTrack(String type) {
+      
         return switch (type) {
-            case PERLIN_NOISE -> new PerlinTrack(panelWidth, panelHeight);
-            case CONVEX_HULL -> new ConvexHullTrack(panelWidth, panelHeight);
-            case PART_TRACK -> new PartTrack(panelWidth, panelHeight);
+            case PERLIN_NOISE -> new PerlinTrack();
+            case CONVEX_HULL -> new ConvexHullTrack();
+            case PART_TRACK -> new PartTrack();
             default -> {
                 for (Track track : customTracks)
                     if (track.getTrackName().equals(type))
                         yield track;
-                yield new PerlinTrack(panelWidth, panelHeight);
+                yield new PerlinTrack();
             }
         };
     }
