@@ -8,8 +8,6 @@ import javafx.scene.control.Label;
 public class TrackCardController {
 
     public TrackCardController(MainStage mainStage) {
-        int panelWidth = (int) mainStage.getMainPanel().getWidth();
-        int panelHeight = (int) mainStage.getMainPanel().getHeight();
         var toggleGroup = new ToggleGroup();
         mainStage.getDrawer().getTrackCard().getPerlinTrackToggle().setOnAction(
                 event -> mainStage.getGeneticAlgorithm().setTrack(TrackFactory.createTrack(TrackFactory.PERLIN_NOISE)));
@@ -26,7 +24,7 @@ public class TrackCardController {
 
         mainStage.getDrawer().getTrackCard().getCustomTrackToggles().forEach(toggle -> {
             toggle.setOnAction(event -> {
-                    String text = ((Label)toggle.getGraphic()).getText();
+                String text = ((Label) toggle.getGraphic()).getText();
                 mainStage.getGeneticAlgorithm().setTrack(TrackFactory.createTrack(text));
             });
             toggle.setToggleGroup(toggleGroup);

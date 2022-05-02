@@ -18,7 +18,7 @@ public interface Track {
      * Afterwards the track is ready to be used and the attribute getters can be
      * called.
      * <br>
-     * TODO: The track will be normalized in a square, which means, that the
+     * The track will be normalized in a square, which means, that the
      * coordinates of the track will always be between 0 and 1.
      * <br>
      * <strong>This method must be called before any other function call in this

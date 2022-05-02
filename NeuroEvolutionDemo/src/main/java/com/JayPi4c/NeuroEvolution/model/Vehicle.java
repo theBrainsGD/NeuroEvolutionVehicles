@@ -22,6 +22,10 @@ public class Vehicle {
 	private double maxForce = 0.2 / 400d;
 
 	private double crashDistance = 5 / 400d;
+	@Getter
+	private double vechileWidth = 1/40d;
+	@Getter
+	private double vehicleHeight = 5/400d;
 
 	private double sight = 1 / 4d;
 	private int lifespan = 35;

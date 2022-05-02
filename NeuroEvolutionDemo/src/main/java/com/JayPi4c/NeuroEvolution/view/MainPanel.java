@@ -62,7 +62,8 @@ public class MainPanel extends Canvas implements Observer {
 		gc.save();
 		gc.translate(mapWidth(v.getPos().x), mapHeight(v.getPos().y));
 		gc.rotate(Math.toDegrees(v.getVel().heading()));
-		gc.strokeRect(-5, -2, 10, 5); // TODO get relative size from vehicle
+		gc.strokeRect(mapWidth(-v.getVechileWidth() / 2), mapHeight(-v.getVehicleHeight()),
+				mapWidth(v.getVechileWidth()), mapHeight(v.getVehicleHeight()));
 		gc.restore();
 	}
 
