@@ -15,14 +15,10 @@ public class PerlinTrack implements Track {
     private int parts = 900;
     private int checkpointDivider = 30;
     private int noiseMax = 8;
-    private int halfTrackWidth = 30;
-    private int panelWidth;
-    private int panelHeight;
+    private double halfTrackWidth = 3d/40d;
 
     @Getter
     private PVector start;
-    @Getter
-    private PVector end;
 
     @Getter
     private List<Boundary> walls;
@@ -31,11 +27,6 @@ public class PerlinTrack implements Track {
 
     public String getTrackName(){
         return "PerlinTrack";
-    }
-
-    protected PerlinTrack(int panelWidth, int panelHeight) {
-        this.panelWidth = panelWidth;
-        this.panelHeight = panelHeight;
     }
 
     @Override
@@ -48,13 +39,13 @@ public class PerlinTrack implements Track {
             double a = map(i, 0, parts, 0, 2 * Math.PI);
             double xoff = map(Math.cos(a), -1, 1, 0, noiseMax);
             double yoff = map(Math.sin(a), -1, 1, 0, noiseMax);
-            double r = map(noise.eval(xoff, yoff), -1, 1, panelWidth * 0.25, panelWidth * 0.4);
-            double innerX = Math.cos(a) * (r - halfTrackWidth) + panelWidth * 0.5;
-            double innerY = Math.sin(a) * (r - halfTrackWidth) + panelHeight * 0.5;
+            double r = map(noise.eval(xoff, yoff), -1, 1, 0.25, 0.4);
+            double innerX = Math.cos(a) * (r - halfTrackWidth) +  0.5;
+            double innerY = Math.sin(a) * (r - halfTrackWidth) +  0.5;
             ptsInner.add(new PVector(innerX, innerY));
 
-            double outerX = Math.cos(a) * (r + halfTrackWidth) + panelWidth * 0.5;
-            double outerY = Math.sin(a) * (r + halfTrackWidth) + panelHeight * 0.5;
+            double outerX = Math.cos(a) * (r + halfTrackWidth) +  0.5;
+            double outerY = Math.sin(a) * (r + halfTrackWidth) +  0.5;
             ptsOuter.add(new PVector(outerX, outerY));
             if (i % checkpointDivider == 0)
                 checkpoints.add(new Boundary(innerX, innerY, outerX, outerY));
@@ -65,7 +56,6 @@ public class PerlinTrack implements Track {
         walls.addAll(Boundary.createBoundaries(ptsOuter, true));
 
         start = checkpoints.get(0).midPoint();
-        end = checkpoints.get(checkpoints.size() - 1).midPoint();
     }
 
     @Override

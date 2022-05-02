@@ -33,22 +33,17 @@ public class GeneticAlgorithm extends Observable {
 
 	private Vehicle prevBest;
 
-	private int panelWidth;
-	private int panelHeight;
-
 	@Synchronized("trackLock")
 	public void setTrack(Track track) {
 		this.track = track;
 		reset();
 	}
 
-	public GeneticAlgorithm(int panelWidth, int panelHeight) {
+	public GeneticAlgorithm() {
 		synchronized (trackLock) {
-			this.track = TrackFactory.createTrack(TrackFactory.CONVEX_HULL, panelWidth, panelHeight);
+			this.track = TrackFactory.createTrack(TrackFactory.CONVEX_HULL);
 		}
 		reset();
-		this.panelWidth = panelWidth;
-		this.panelHeight = panelHeight;
 	}
 
 	public void reset() {

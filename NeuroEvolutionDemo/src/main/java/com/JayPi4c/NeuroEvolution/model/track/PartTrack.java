@@ -42,13 +42,8 @@ public class PartTrack implements Track {
     private final Random random;
     private PART[][] track;
 
-    private final int panelWidth;
-    private final int panelHeight;
-
     @Getter
     private PVector start;
-    @Getter
-    private PVector end;
 
     @Getter
     private List<Boundary> walls;
@@ -59,15 +54,11 @@ public class PartTrack implements Track {
         return "PartTrack";
     }
 
-    protected PartTrack(int panelWidth, int panelHeight) {
-        this.panelWidth = panelWidth;
-        this.panelHeight = panelHeight;
+    protected PartTrack() {
         random = new Random();
     }
 
-    protected PartTrack(int panelWidth, int panelHeight, int seed) {
-        this.panelWidth = panelWidth;
-        this.panelHeight = panelHeight;
+    protected PartTrack(int seed) {
         random = new Random(seed);
     }
 
@@ -93,7 +84,6 @@ public class PartTrack implements Track {
         generateWallsAndCheckpoints(ROWS - 1, COLUMNS - 1);
 
         start = checkpoints.get(0).midPoint();
-        end = checkpoints.get(checkpoints.size() - 1).midPoint();
     }
 
     private void generateTrack() {
@@ -196,10 +186,10 @@ public class PartTrack implements Track {
     }
 
     private void generateWallsAndCheckpoints(int row, int col) {
-        final int partSize = panelWidth / COLUMNS;
+        final double partSize = 1d / COLUMNS;
 
-        int colOffset = row * partSize;
-        int rowOffset = col * partSize;
+        double colOffset = row * partSize;
+        double rowOffset = col * partSize;
 
         List<Boundary> boundaries = track[row][col].getBoundaries();
         for (Boundary boundary : boundaries) {

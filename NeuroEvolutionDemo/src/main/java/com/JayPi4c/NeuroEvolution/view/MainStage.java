@@ -83,7 +83,7 @@ public class MainStage extends Stage {
 
 	public MainStage() {
 
-		geneticAlgorithm = new GeneticAlgorithm(mainStageWidth, mainStageWidth);
+		geneticAlgorithm = new GeneticAlgorithm();
 
 		createMenubar();
 		createToolbar();
