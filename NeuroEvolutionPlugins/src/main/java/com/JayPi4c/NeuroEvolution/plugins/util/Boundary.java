@@ -3,6 +3,9 @@ package com.JayPi4c.NeuroEvolution.plugins.util;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author JayPi4c
+ */
 public class Boundary {
 
     private PVector a;
