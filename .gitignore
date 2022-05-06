@@ -1,7 +1,10 @@
-/bin/
-/.settings/
-/.classpath
-/.project
-/NeuralNetwork.nn
-/target/
+bin/
+.settings/
+.classpath
+.project
+NeuralNetwork.nn
+target/
 logs/
+.vscode
+.apt_generated
+.apt_generated_tests
