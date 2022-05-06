@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Class to represent a boundary on the track.
+ * 
  * @author JayPi4c
  */
 public class Boundary {
