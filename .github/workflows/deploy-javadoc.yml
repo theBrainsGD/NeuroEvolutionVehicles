@@ -2,6 +2,7 @@ name: Deploy JavaDoc
 
 on:
   push:
+    branches:
       - master
     paths:
       - NeuroEvolutionPlugins/src/**
