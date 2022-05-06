@@ -28,8 +28,10 @@ public class ConvexHullTrack implements Track {
     }
 
     /**
-     * @implNote <a href=
+     *  <a href=
      * "https://www.gamedeveloper.com/programming/generating-procedural-racetracks">gamedeveloper.com</a>
+     *
+     * {@inheritDoc}
      */
     @Override
     public void buildTrack() {
