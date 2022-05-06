@@ -2,7 +2,7 @@ name: Deploy JavaDoc
 
 on:
   push:
-      - main
+      - master
     paths:
       - NeuroEvolutionPlugins/src/**
       - NeuroEvolutionPlugins/pom.xml
