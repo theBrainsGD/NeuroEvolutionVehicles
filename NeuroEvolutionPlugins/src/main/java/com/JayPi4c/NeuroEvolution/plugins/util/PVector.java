@@ -125,6 +125,9 @@ public class PVector implements Serializable {
 
 	/**
 	 * Constructor for a 2D vector: z coordinate is set to 0.
+	 * 
+	 * @param x the x coordinate.
+	 * @param y the y coordinate.
 	 */
 	public PVector(double x, double y) {
 		this.x = x;
@@ -142,6 +145,7 @@ public class PVector implements Serializable {
 	 * @param x the x component of the vector
 	 * @param y the y component of the vector
 	 * @param z the z component of the vector
+	 * @return this
 	 */
 	public PVector set(double x, double y, double z) {
 		this.x = x;
@@ -153,6 +157,7 @@ public class PVector implements Serializable {
 	/**
 	 * @param x the x component of the vector
 	 * @param y the y component of the vector
+	 * @return this
 	 */
 	public PVector set(double x, double y) {
 		this.x = x;
@@ -163,6 +168,7 @@ public class PVector implements Serializable {
 
 	/**
 	 * @param v any variable of type PVector
+	 * @return this
 	 */
 	public PVector set(PVector v) {
 		x = v.x;
@@ -175,6 +181,7 @@ public class PVector implements Serializable {
 	 * Set the x, y (and maybe z) coordinates using a double[] array as the source.
 	 * 
 	 * @param source array to copy from
+	 * @return this
 	 */
 	public PVector set(double[] source) {
 		if (source.length >= 2) {
@@ -266,6 +273,7 @@ public class PVector implements Serializable {
 	/**
 	 * Make a new 2D unit vector from an angle
 	 *
+	 * @param angle  the angle in radians
 	 * @param target the target vector (if null, a new vector will be created)
 	 * @return the PVector
 	 */
@@ -284,19 +292,26 @@ public class PVector implements Serializable {
 	 * Gets a copy of the vector, returns a PVector object.
 	 *
 	 * ( end auto-generated )
-	 *
+	 * 
+	 * @return a new Pvector with the same values
 	 */
 	public PVector copy() {
 		return new PVector(x, y, z);
 	}
 
+	/**
+	 * Use copy().
+	 * 
+	 * @return copy of this vector
+	 */
 	@Deprecated
 	public PVector get() {
 		return copy();
 	}
 
 	/**
-	 * @param target
+	 * @param target the array to put the values into
+	 * @return the array
 	 */
 	public double[] get(double[] target) {
 		if (target == null) {
@@ -355,6 +370,7 @@ public class PVector implements Serializable {
 	 * ( end auto-generated )
 	 *
 	 * @param v the vector to be added
+	 * @return this
 	 */
 	public PVector add(PVector v) {
 		x += v.x;
@@ -366,6 +382,7 @@ public class PVector implements Serializable {
 	/**
 	 * @param x x component of the vector
 	 * @param y y component of the vector
+	 * @return this
 	 */
 	public PVector add(double x, double y) {
 		this.x += x;
@@ -374,7 +391,10 @@ public class PVector implements Serializable {
 	}
 
 	/**
+	 * @param x x component of the vector
+	 * @param y y component of the vector
 	 * @param z z component of the vector
+	 * @return this
 	 */
 	public PVector add(double x, double y, double z) {
 		this.x += x;
@@ -388,6 +408,7 @@ public class PVector implements Serializable {
 	 * 
 	 * @param v1 a vector
 	 * @param v2 another vector
+	 * @return the resulting vector
 	 */
 	static public PVector add(PVector v1, PVector v2) {
 		return add(v1, v2, null);
@@ -396,7 +417,10 @@ public class PVector implements Serializable {
 	/**
 	 * Add two vectors into a target vector
 	 * 
+	 * @param v1     a vector
+	 * @param v2     another vector
 	 * @param target the target vector (if null, a new vector will be created)
+	 * @return the resulting vector
 	 */
 	static public PVector add(PVector v1, PVector v2, PVector target) {
 		if (target == null) {
@@ -419,6 +443,7 @@ public class PVector implements Serializable {
 	 * ( end auto-generated )
 	 *
 	 * @param v any variable of type PVector
+	 * @return this
 	 */
 	public PVector sub(PVector v) {
 		x -= v.x;
@@ -430,6 +455,7 @@ public class PVector implements Serializable {
 	/**
 	 * @param x the x component of the vector
 	 * @param y the y component of the vector
+	 * @return this
 	 */
 	public PVector sub(double x, double y) {
 		this.x -= x;
@@ -438,7 +464,10 @@ public class PVector implements Serializable {
 	}
 
 	/**
+	 * @param x the x component of the vector
+	 * @param y the y component of the vector
 	 * @param z the z component of the vector
+	 * @return this
 	 */
 	public PVector sub(double x, double y, double z) {
 		this.x -= x;
@@ -452,6 +481,7 @@ public class PVector implements Serializable {
 	 * 
 	 * @param v1 the x, y, and z components of a PVector object
 	 * @param v2 the x, y, and z components of a PVector object
+	 * @return the resulting vector
 	 */
 	static public PVector sub(PVector v1, PVector v2) {
 		return sub(v1, v2, null);
@@ -460,7 +490,10 @@ public class PVector implements Serializable {
 	/**
 	 * Subtract one vector from another and store in another vector
 	 * 
+	 * @param v1     a vector
+	 * @param v2     another vector
 	 * @param target PVector in which to store the result
+	 * @return the resulting vector
 	 */
 	static public PVector sub(PVector v1, PVector v2, PVector target) {
 		if (target == null) {
@@ -479,6 +512,7 @@ public class PVector implements Serializable {
 	 * ( end auto-generated )
 	 *
 	 * @param n the number to multiply with the vector
+	 * @return this
 	 */
 	public PVector mult(double n) {
 		x *= n;
@@ -488,7 +522,9 @@ public class PVector implements Serializable {
 	}
 
 	/**
+	 * @param n the number to multiply with the vector
 	 * @param v the vector to multiply by the scalar
+	 * @return the resulting vector
 	 */
 	static public PVector mult(PVector v, double n) {
 		return mult(v, n, null);
@@ -497,7 +533,10 @@ public class PVector implements Serializable {
 	/**
 	 * Multiply a vector by a scalar, and write the result into a target PVector.
 	 * 
+	 * @param v      the vector to multiply by the scalar
+	 * @param n      the number to multiply with the vector
 	 * @param target PVector in which to store the result
+	 * @return the resulting vector
 	 */
 	static public PVector mult(PVector v, double n, PVector target) {
 		if (target == null) {
@@ -516,6 +555,7 @@ public class PVector implements Serializable {
 	 * ( end auto-generated )
 	 *
 	 * @param n the number by which to divide the vector
+	 * @return this
 	 */
 	public PVector div(double n) {
 		x /= n;
@@ -528,6 +568,7 @@ public class PVector implements Serializable {
 	 * Divide a vector by a scalar and return the result in a new vector.
 	 * 
 	 * @param v the vector to divide by the scalar
+	 * @param n the number by which to divide the vector
 	 * @return a new vector that is v1 / n
 	 */
 	static public PVector div(PVector v, double n) {
@@ -537,7 +578,10 @@ public class PVector implements Serializable {
 	/**
 	 * Divide a vector by a scalar and store the result in another vector.
 	 * 
+	 * @param v      the vector to divide by the scalar
+	 * @param n      the number by which to divide the vector
 	 * @param target PVector in which to store the result
+	 * @return the resulting vector
 	 */
 	static public PVector div(PVector v, double n, PVector target) {
 		if (target == null) {
@@ -557,6 +601,7 @@ public class PVector implements Serializable {
 	 * ( end auto-generated )
 	 *
 	 * @param v the x, y, and z coordinates of a PVector
+	 * @return the length of v
 	 */
 	public double dist(PVector v) {
 		double dx = x - v.x;
@@ -595,6 +640,7 @@ public class PVector implements Serializable {
 	 * @param x x component of the vector
 	 * @param y y component of the vector
 	 * @param z z component of the vector
+	 * @return the dot product
 	 */
 	public double dot(double x, double y, double z) {
 		return this.x * x + this.y * y + this.z * z;
@@ -603,6 +649,7 @@ public class PVector implements Serializable {
 	/**
 	 * @param v1 any variable of type PVector
 	 * @param v2 any variable of type PVector
+	 * @return the dot product
 	 */
 	static public double dot(PVector v1, PVector v2) {
 		return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
@@ -617,6 +664,7 @@ public class PVector implements Serializable {
 	 * ( end auto-generated )
 	 *
 	 * @param v the vector to calculate the cross product
+	 * @return the cross product
 	 */
 	public PVector cross(PVector v) {
 		return cross(v, null);
@@ -625,6 +673,7 @@ public class PVector implements Serializable {
 	/**
 	 * @param v      any variable of type PVector
 	 * @param target PVector to store the result
+	 * @return the cross product
 	 */
 	public PVector cross(PVector v, PVector target) {
 		double crossX = y * v.z - v.y * z;
@@ -643,6 +692,7 @@ public class PVector implements Serializable {
 	 * @param v1     any variable of type PVector
 	 * @param v2     any variable of type PVector
 	 * @param target PVector to store the result
+	 * @return the cross product
 	 */
 	static public PVector cross(PVector v1, PVector v2, PVector target) {
 		double crossX = v1.y * v2.z - v2.y * v1.z;
@@ -663,7 +713,8 @@ public class PVector implements Serializable {
 	 * Normalize the vector to length 1 (make it a unit vector).
 	 *
 	 * ( end auto-generated )
-	 *
+	 * 
+	 * @return this
 	 */
 	public PVector normalize() {
 		double m = mag();
@@ -699,6 +750,7 @@ public class PVector implements Serializable {
 	 * ( end auto-generated )
 	 *
 	 * @param max the maximum magnitude for the vector
+	 * @return this
 	 */
 	public PVector limit(double max) {
 		if (magSq() > max * max) {
@@ -717,6 +769,7 @@ public class PVector implements Serializable {
 	 * ( end auto-generated )
 	 *
 	 * @param len the new length for this vector
+	 * @return this
 	 */
 	public PVector setMag(double len) {
 		normalize();
@@ -751,6 +804,10 @@ public class PVector implements Serializable {
 		return angle;
 	}
 
+	/**
+	 * 
+	 * @return the angle of rotation
+	 */
 	@Deprecated
 	public double heading2D() {
 		return heading();
@@ -764,6 +821,7 @@ public class PVector implements Serializable {
 	 * ( end auto-generated )
 	 *
 	 * @param theta the angle of rotation
+	 * @return this
 	 */
 	public PVector rotate(double theta) {
 		double temp = x;
@@ -782,6 +840,7 @@ public class PVector implements Serializable {
 	 *
 	 * @param v1 the x, y, and z components of a PVector
 	 * @param v2 the x, y, and z components of a PVector
+	 * @return the angle between the two vectors
 	 */
 	static public double angleBetween(PVector v1, PVector v2) {
 
@@ -824,7 +883,8 @@ public class PVector implements Serializable {
 	 * using the <b>PVector.get()</b> method to copy into your own array.
 	 *
 	 * ( end auto-generated )
-	 *
+	 * 
+	 * @return an array of the x, y, and z components of this vector
 	 */
 	public double[] array() {
 		if (array == null) {
