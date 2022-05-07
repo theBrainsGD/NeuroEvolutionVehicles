@@ -23,8 +23,20 @@ jobs:
     - name: Verify with Maven
       run: mvn --batch-mode --update-snapshots verify
       
-  publish:
+  clearRelease:
     needs: verify
+    name: delete 'development' tag and release
+    runs-on: ubuntu-latest
+    steps:
+    - uses: dev-drprasad/delete-tag-and-release@v0.2.0
+      with:
+        delete_release: true
+        tag_name: development
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    needs: clearRelease
     name: Publish for ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
