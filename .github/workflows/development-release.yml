@@ -31,14 +31,14 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            artifact_name: NeuroEvolutionDeom.jar
-            asset_name: NeuroEvolutionDeom-Linux.jar
+            artifact_name: NeuroEvolutionDemo.jar
+            asset_name: NeuroEvolutionDemo-Linux.jar
           - os: windows-latest
-            artifact_name: NeuroEvolutionDeom.jar
-            asset_name: NeuroEvolutionDeom-Win.jar
+            artifact_name: NeuroEvolutionDemo.jar
+            asset_name: NeuroEvolutionDemo-Win.jar
           - os: macos-latest
-            artifact_name: NeuroEvolutionDeom.jar
-            asset_name: NeuroEvolutionDeom-Mac.jar
+            artifact_name: NeuroEvolutionDemo.jar
+            asset_name: NeuroEvolutionDemo-Mac.jar
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 17
