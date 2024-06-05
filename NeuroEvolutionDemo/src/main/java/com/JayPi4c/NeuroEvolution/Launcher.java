@@ -1,7 +1,7 @@
 package com.JayPi4c.NeuroEvolution;
 
 /**
- * Lauches the whole program.
+ * Launches the whole program.
  * 
  * @author JayPi4c
  */

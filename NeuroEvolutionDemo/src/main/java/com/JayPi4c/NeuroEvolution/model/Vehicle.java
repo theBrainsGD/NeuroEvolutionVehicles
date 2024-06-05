@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import com.JayPi4c.GenericNeuralNetwork;
+import org.schlunzis.zis.ai.nn.GeneticNeuralNetwork;
 import com.JayPi4c.NeuroEvolution.plugins.util.Boundary;
 import com.JayPi4c.NeuroEvolution.plugins.util.PVector;
 
@@ -47,7 +47,7 @@ public class Vehicle {
 	private int lapCount;
 	private int checkpointIndex;
 
-	private GenericNeuralNetwork brain;
+	private GeneticNeuralNetwork brain;
 
 	private Random random;
 
@@ -59,7 +59,7 @@ public class Vehicle {
 	 * @param nn
 	 * @param mutationRate
 	 */
-	public Vehicle(PVector start, PVector startVel, GenericNeuralNetwork nn, double mutationRate) {
+	public Vehicle(PVector start, PVector startVel, GeneticNeuralNetwork nn, double mutationRate) {
 		id = UUID.randomUUID();
 		random = new Random();
 		checkPointFitness = 0;
@@ -88,7 +88,7 @@ public class Vehicle {
 		if (nn != null) {
 			brain = nn.copy();
 		} else
-			brain = new GenericNeuralNetwork(rays.size(), rays.size() * 2, 2, 0, mutationRate);
+			brain = new GeneticNeuralNetwork(0, mutationRate, rays.size(), 2, rays.size() * 2);
 	}
 
 	public Vehicle(PVector start, double mutationRate) {
@@ -107,11 +107,11 @@ public class Vehicle {
 		this.startVel = vel.copy();
 	}
 
-	public GenericNeuralNetwork getBrain() {
+	public GeneticNeuralNetwork getBrain() {
 		return brain.copy();
 	}
 
-	public void setBrain(GenericNeuralNetwork nn) {
+	public void setBrain(GeneticNeuralNetwork nn) {
 		brain = nn;
 	}
 

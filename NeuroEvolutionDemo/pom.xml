@@ -161,17 +161,17 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.22</version>
+			<version>1.18.32</version>
 		</dependency>
 		<dependency>
-			<groupId>com.github.JayPi4c</groupId>
-			<artifactId>NeuralNetwork</artifactId>
-			<version>7158fae</version>
+			<groupId>com.github.schlunzis.ze-impressive-schwifty</groupId>
+			<artifactId>zis-ai</artifactId>
+			<version>79254f034a784d3dd9166879c74732b935635539</version>
 		</dependency>
-		<dependency>
+	<!--	<dependency>
 			<groupId>com.badlogicgames.gdx</groupId>
 			<artifactId>gdx</artifactId>
 			<version>1.10.0</version>
-		</dependency>
+		</dependency>-->
 	</dependencies>
 </project>
